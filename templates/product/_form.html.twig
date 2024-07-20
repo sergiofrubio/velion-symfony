@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="mb-3">
+	{{ form_label(form.name) }}
+	{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
+	{{ form_errors(form.name) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.description) }}
+	{{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción'}}) }}
+	{{ form_errors(form.description) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.price) }}
+	{{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Precio'}}) }}
+	{{ form_errors(form.price) }}
+</div>
+
+<div class="mb-3">
+	<button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+	<a href="#" onclick="history.back();" class="btn btn-secondary">Volver atrás</a>
+</div>
 {{ form_end(form) }}

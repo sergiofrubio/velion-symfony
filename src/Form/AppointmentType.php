@@ -2,27 +2,33 @@
 
 namespace App\Form;
 
-use App\Entity\Invoice;
+use App\Entity\Appointment;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
-class InvoiceType extends AbstractType
+class AppointmentType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('issue_date', null, [
+            ->add('date', null, [
                 'widget' => 'single_text',
             ])
-            ->add('status')
+            ->add('time', null, [
+                'widget' => 'single_text',
+            ])
+            ->add('diagnosis')
+            ->add('treatment')
+            ->add('notes')
+            ->add('duration')
         ;
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
-            'data_class' => Invoice::class,
+            'data_class' => Appointment::class,
         ]);
     }
 }

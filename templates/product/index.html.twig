@@ -10,7 +10,6 @@
 		<div class="d-flex justify-content-end align-items-center">
 			<form action="../scripts/product_manager.php" method="POST">
 				<div class="col-auto">
-					<input type="hidden" value="exportar" id="action" name="action">
 					<button class="btn btn-primary me-2" type="submit">
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-pdf" viewbox="0 0 16 16">
 							<path d="M14 14V4.5L9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2M9.5 3A1.5 1.5 0 0 0 11 4.5h2V14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1h5.5z"/>
@@ -21,13 +20,13 @@
 				</div>
 			</form>
 
-			<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#agregarModal">
+			<a type="button" class="btn btn-primary" href="{{ path('app_product_new') }}">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-dotted" viewbox="0 0 16 16">
 					<path d="M8 0q-.264 0-.523.017l.064.998a7 7 0 0 1 .918 0l.064-.998A8 8 0 0 0 8 0M6.44.152q-.52.104-1.012.27l.321.948q.43-.147.884-.237L6.44.153zm4.132.271a8 8 0 0 0-1.011-.27l-.194.98q.453.09.884.237zm1.873.925a8 8 0 0 0-.906-.524l-.443.896q.413.205.793.459zM4.46.824q-.471.233-.905.524l.556.83a7 7 0 0 1 .793-.458zM2.725 1.985q-.394.346-.74.74l.752.66q.303-.345.648-.648zm11.29.74a8 8 0 0 0-.74-.74l-.66.752q.346.303.648.648zm1.161 1.735a8 8 0 0 0-.524-.905l-.83.556q.254.38.458.793l.896-.443zM1.348 3.555q-.292.433-.524.906l.896.443q.205-.413.459-.793zM.423 5.428a8 8 0 0 0-.27 1.011l.98.194q.09-.453.237-.884zM15.848 6.44a8 8 0 0 0-.27-1.012l-.948.321q.147.43.237.884zM.017 7.477a8 8 0 0 0 0 1.046l.998-.064a7 7 0 0 1 0-.918zM16 8a8 8 0 0 0-.017-.523l-.998.064a7 7 0 0 1 0 .918zm-.152 1.56q-.104.52-.27 1.012l-.948-.321q.147-.43.237-.884zm-15.425.271a8 8 0 0 0 .27 1.012l.98-.194q-.09-.453-.237-.884zm14.478 2.597q.233-.471.524-.905l-.83-.556q-.205.413-.459.793zm-13.843-.905a8 8 0 0 0 .524.905l.83-.556q-.254-.38-.458-.793zm-.925 1.873q.346.394.74.74l.66-.752q-.345-.303-.648-.648zm14.742.74a8 8 0 0 0 .74-.74l-.752-.66q-.303.345-.648.648zm-1.735 1.161q.433-.292.905-.524l-.556-.83q-.38.254-.793.458zm-10.51-.524a8 8 0 0 0 .906.524l.443-.896q-.413-.205-.793-.459zm9.176.646q.52-.104 1.012-.27l-.321-.948q-.43.147-.884.237zM3.516 15.577q.471.233.905.524l.556-.83q-.38-.254-.793-.458zm8.84.524a8 8 0 0 0 1.012-.27l-.194-.98q-.453.09-.884.237zm-4.469.271c.175.011.351.017.523.017s.348-.006.523-.017l-.064-.998a7 7 0 0 1-.918 0z"/>
 					<path d="M8 4a.5.5 0 0 1 .5.5V7h2.5a.5.5 0 0 1 0 1H8.5v2.5a.5.5 0 0 1-1 0V8H5a.5.5 0 0 1 0-1h2.5V4.5A.5.5 0 0 1 8 4z"/>
 				</svg>
 				Agregar Producto
-			</button>
+			</a>
 		</div>
 	</div>
 
@@ -35,7 +34,7 @@
 	<div class="table-responsive small">
 		<form class="row g-3 mb-3" method="POST" action="">
 			<div class="col-auto">
-				<input type="text" class="form-control" id="producto_id" name="producto_id" value="<?php echo $filtro_producto_id; ?>" placeholder="Filtrar por ID...">
+				<input type="text" class="form-control" id="producto_id" name="producto_id" placeholder="Filtrar por ID...">
 			</div>
 			<div class="col-auto">
 				<select class="form-select" id="categoria_id" name="categoria_id">
@@ -74,19 +73,18 @@
 									<td>{{ product.price }}</td>
 									<td></td>
 									<td>
-										<button class="btn btn-sm btn-warning" data-bs-toggle="modal" data-bs-target="#edit_<?php echo $producto['producto_id']; ?>">
+										<a class="btn btn-sm btn-warning" href="{{ path('app_product_edit', {'id': product.id}) }}">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-pencil-square" viewbox="0 0 16 16">
 												<path d="M15.502 1.94a.5.5 0 0 1 0 .706L14.459 3.69l-2-2L13.502.646a.5.5 0 0 1 .707 0l1.293 1.293zm-1.75 2.456-2-2L4.939 9.21a.5.5 0 0 0-.121.196l-.805 2.414a.25.25 0 0 0 .316.316l2.414-.805a.5.5 0 0 0 .196-.12l6.813-6.814z"/>
 												<path fill-rule="evenodd" d="M1 13.5A1.5 1.5 0 0 0 2.5 15h11a1.5 1.5 0 0 0 1.5-1.5v-6a.5.5 0 0 0-1 0v6a.5.5 0 0 1-.5.5h-11a.5.5 0 0 1-.5-.5v-11a.5.5 0 0 1 .5-.5H9a.5.5 0 0 0 0-1H2.5A1.5 1.5 0 0 0 1 2.5z"/>
 											</svg>
-										</button>
-										<button class="btn btn-sm btn-danger" data-bs-toggle="modal" data-bs-target="#delete_<?php echo $producto['producto_id']; ?>">
+										</a>
+										<a class="btn btn-sm btn-danger"  href="{{ path('app_product_delete', {'id': product.id}) }}" onClick="return confirm('¿Deseas elmiminar este elemento?');">
 											<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewbox="0 0 16 16">
 												<path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5m3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0z"/>
 												<path d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4zM2.5 3h11V2h-11z"/>
 											</svg>
-										</button>
-										<?php include './modals/products/edit_delete_modal.php'; ?>
+										</a>
 									</td>
 								</tr>
 							{% else %}
@@ -105,6 +103,4 @@
     <div class="navigation">
     	{{ knp_pagination_render(pagination) }}
 	</div>
-
-	<a href="{{ path('app_product_new') }}">Create new</a>
 {% endblock %}
