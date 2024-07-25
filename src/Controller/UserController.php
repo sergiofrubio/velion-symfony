@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\RegistrationFormType;
+use App\Form\UserFilterType;
 use App\Form\UserType;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,16 +21,27 @@ class UserController extends AbstractController
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
     public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
     {
-        $query = $userRepository->findAllUsers();
-        $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
-            10 /*limit per page*/
-        );
-
-        return $this->render('user/index.html.twig', [
-            'pagination' => $pagination,
-        ]);
+         // Create the filter form
+         $filterForm = $this->createForm(UserFilterType::class);
+         $filterForm->handleRequest($request);
+ 
+         // Get filter data
+         $filters = $filterForm->getData();
+ 
+         // Get filtered users
+         $queryBuilder = $userRepository->getFilteredUsersQuery($filters);
+ 
+         // Paginate the results
+         $pagination = $paginator->paginate(
+             $queryBuilder,
+             $request->query->getInt('page', 1),
+             10
+         );
+ 
+         return $this->render('user/index.html.twig', [
+             'pagination' => $pagination,
+             'filter_form' => $filterForm->createView(),
+         ]);
     }
 
     #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]

@@ -1,4 +1,24 @@
 {{ form_start(form) }}
-    {{ form_widget(form) }}
-    <button class="btn">{{ button_label|default('Save') }}</button>
+<div class="mb-3">
+	{{ form_label(form.date) }}
+	{{ form_widget(form.date, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.date) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.time) }}
+	{{ form_widget(form.time, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.time) }}
+</div>
+
+<div class="mb-3">
+	{{ form_label(form.duration) }}
+	{{ form_widget(form.duration, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.duration) }}
+</div>
+
+<div class="mb-3">
+	<button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>
+	<a href="#" onclick="history.back();" class="btn btn-secondary">Volver atrás</a>
+</div>
 {{ form_end(form) }}

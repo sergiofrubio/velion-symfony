@@ -32,7 +32,7 @@ class AppointmentController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($appointment);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Cita asignada con éxito.');
             return $this->redirectToRoute('app_appointment_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,7 +58,7 @@ class AppointmentController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Cita actualizada con éxito.');
             return $this->redirectToRoute('app_appointment_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,7 +75,7 @@ class AppointmentController extends AbstractController
             $entityManager->remove($appointment);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Cita eliminada con éxito.');
         return $this->redirectToRoute('app_appointment_index', [], Response::HTTP_SEE_OTHER);
     }
 }

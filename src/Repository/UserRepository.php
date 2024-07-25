@@ -48,4 +48,21 @@ class UserRepository extends ServiceEntityRepository
              FROM App\Entity\User u'
         );
     }
+
+    public function getFilteredUsersQuery($filters)
+    {
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        if (!empty($filters['usuario_id'])) {
+            $queryBuilder->andWhere('u.id LIKE :usuario_id')
+                         ->setParameter('usuario_id', '%'.$filters['usuario_id'].'%');
+        }
+
+        if (!empty($filters['rol'])) {
+            $queryBuilder->andWhere('u.roles LIKE :rol')
+                         ->setParameter('rol', '%'.$filters['rol'].'%');
+        }
+
+        return $queryBuilder->getQuery();
+    }
 }

@@ -142,11 +142,11 @@ class PdfController extends AbstractController
     //     }
     // }
 
+    #[Route('/product-list', name: 'product_export', methods: ['GET'])]
     public function exportarProductosAPdf(ProductRepository $productRepository) : Response
     {
         $productos = $productRepository->findAll();
 
-    
         // Instanciar un nuevo objeto FPDF
         $pdf = new FPDF(); // Orientación horizontal, unidad de medida en mm, tamaño de página A4
     
@@ -164,7 +164,7 @@ class PdfController extends AbstractController
         $pdf->SetFont('Arial', 'B', 8); // Cambiar el tamaño de la letra
         $pdf->SetFillColor(230, 230, 230);
         $pdf->Cell(27, 10, 'ID', 1, 0, 'C'); // Reducir la anchura de la celda
-        $pdf->Cell(59, 10, iconv('UTF-8', 'windows-1252', 'Nombre'), 1, 0, 'C'); // Ajustar la anchura de la celda
+        $pdf->Cell(118, 10, iconv('UTF-8', 'windows-1252', 'Nombre'), 1, 0, 'C'); // Ajustar la anchura de la celda
         // $pdf->Cell(59, 10, iconv('UTF-8', 'windows-1252', 'Categoria'), 1, 0, 'C'); // Ajustar la anchura de la celda
         $pdf->Cell(45, 10, iconv('UTF-8', 'windows-1252', 'Monto'), 1, 0, 'C'); // Ajustar la anchura de la celda
 
@@ -173,8 +173,8 @@ class PdfController extends AbstractController
         // Recorrer los usuarios y mostrarlos en la tabla
         $pdf->SetFont('Arial', '', 8);
         foreach ($productos as $producto) {
-            $pdf->Cell(27, 10, $producto['producto_id'], 1, 0, 'C');
-            $pdf->Cell(59, 10, iconv('UTF-8', 'windows-1252', $producto->getName()), 1, 0, 'L');
+            $pdf->Cell(27, 10, $producto->getId(), 1, 0, 'C');
+            $pdf->Cell(118, 10, iconv('UTF-8', 'windows-1252', $producto->getName()), 1, 0, 'L');
             // $pdf->Cell(59, 10, iconv('UTF-8', 'windows-1252', $producto['categoria']), 1, 0, 'L');
             $pdf->Cell(45, 10, iconv('UTF-8', 'windows-1252', $producto->getPrice(). '€'), 1, 0, 'C');
             $pdf->Ln(); // Salto de línea para la siguiente fila
@@ -196,6 +196,7 @@ class PdfController extends AbstractController
         return $response;
     }
 
+    #[Route('/specialization-list', name: 'specialization_export', methods: ['GET'])]
     public function exportarEspecialidadesAPdf(SpecializationRepository $specializationRepository) : Response
     {
         $especialidades = $specializationRepository->findAll();
@@ -217,7 +218,7 @@ class PdfController extends AbstractController
         $pdf->SetFont('Arial', 'B', 8); // Cambiar el tamaño de la letra
         $pdf->SetFillColor(230, 230, 230);
         $pdf->Cell(27, 10, 'ID', 1, 0, 'C'); // Reducir la anchura de la celda
-        $pdf->Cell(118, 10, iconv('UTF-8', 'windows-1252', 'Descripción'), 1, 0, 'C'); // Ajustar la anchura de la celda
+        $pdf->Cell(163, 10, iconv('UTF-8', 'windows-1252', 'Descripción'), 1, 0, 'C'); // Ajustar la anchura de la celda
         // $pdf->Cell(45, 10, iconv('UTF-8', 'windows-1252', 'Última modificación'), 1, 0, 'C'); // Ajustar la anchura de la celda
         $pdf->Ln(); // Salto de línea para la siguiente fila
     
@@ -225,7 +226,7 @@ class PdfController extends AbstractController
         $pdf->SetFont('Arial', '', 8);
         foreach ($especialidades as $especialidad) {
             $pdf->Cell(27, 10, $especialidad->getId(), 1, 0, 'C');
-            $pdf->Cell(118, 10, iconv('UTF-8', 'windows-1252', $especialidad->getDescription()), 1, 0, 'L');
+            $pdf->Cell(163, 10, iconv('UTF-8', 'windows-1252', $especialidad->getDescription()), 1, 0, 'L');
             // $pdf->Cell(45, 10, $especialidad['fecha'], 1, 0, 'C');
             $pdf->Ln(); // Salto de línea para la siguiente fila
         }
@@ -237,13 +238,13 @@ class PdfController extends AbstractController
             
         // Generar el archivo PDF y descargarlo
         $pdfContent = $pdf->Output('S');
-            // Generar el archivo PDF y descargarlo
-            $response = new Response($pdfContent, 200, [
-                'Content-Type' => 'application/pdf',
-                'Content-Disposition' => 'inline; filename="Especialidades.pdf"'
-            ]);
-    
-            return $response;
+        // Generar el archivo PDF y descargarlo
+        $response = new Response($pdfContent, 200, [
+            'Content-Type' => 'application/pdf',
+            'Content-Disposition' => 'inline; filename="Especialidades.pdf"'
+        ]);
+
+        return $response;
     }
 
 }

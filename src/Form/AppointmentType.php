@@ -18,9 +18,9 @@ class AppointmentType extends AbstractType
             ->add('time', null, [
                 'widget' => 'single_text',
             ])
-            ->add('diagnosis')
-            ->add('treatment')
-            ->add('notes')
+            // ->add('diagnosis')
+            // ->add('treatment')
+            // ->add('notes')
             ->add('duration')
         ;
     }

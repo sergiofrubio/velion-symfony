@@ -20,14 +20,14 @@ class Appointment
     #[ORM\Column(type: Types::TIME_MUTABLE)]
     private ?\DateTimeInterface $time = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $diagnosis = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $diagnosis = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $treatment = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $treatment = null;
 
-    #[ORM\Column(length: 255, nullable: true)]
-    private ?string $notes = null;
+    // #[ORM\Column(length: 255, nullable: true)]
+    // private ?string $notes = null;
 
     #[ORM\Column]
     private ?int $duration = null;
@@ -61,41 +61,41 @@ class Appointment
         return $this;
     }
 
-    public function getDiagnosis(): ?string
-    {
-        return $this->diagnosis;
-    }
+    // public function getDiagnosis(): ?string
+    // {
+    //     return $this->diagnosis;
+    // }
 
-    public function setDiagnosis(?string $diagnosis): static
-    {
-        $this->diagnosis = $diagnosis;
+    // public function setDiagnosis(?string $diagnosis): static
+    // {
+    //     $this->diagnosis = $diagnosis;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getTreatment(): ?string
-    {
-        return $this->treatment;
-    }
+    // public function getTreatment(): ?string
+    // {
+    //     return $this->treatment;
+    // }
 
-    public function setTreatment(?string $treatment): static
-    {
-        $this->treatment = $treatment;
+    // public function setTreatment(?string $treatment): static
+    // {
+    //     $this->treatment = $treatment;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
-    public function getNotes(): ?string
-    {
-        return $this->notes;
-    }
+    // public function getNotes(): ?string
+    // {
+    //     return $this->notes;
+    // }
 
-    public function setNotes(?string $notes): static
-    {
-        $this->notes = $notes;
+    // public function setNotes(?string $notes): static
+    // {
+    //     $this->notes = $notes;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getDuration(): ?int
     {

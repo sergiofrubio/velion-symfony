@@ -39,7 +39,7 @@ class SpecializationController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($specialization);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Especialidad asignada con éxito.');
             return $this->redirectToRoute('app_specialization_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -65,7 +65,7 @@ class SpecializationController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Especialidad actualizada con éxito.');
             return $this->redirectToRoute('app_specialization_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -82,7 +82,7 @@ class SpecializationController extends AbstractController
             $entityManager->remove($specialization);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Especialidad eliminada con éxito.');
         return $this->redirectToRoute('app_specialization_index', [], Response::HTTP_SEE_OTHER);
     }
 }

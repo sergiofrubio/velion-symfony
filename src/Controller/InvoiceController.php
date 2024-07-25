@@ -32,7 +32,7 @@ class InvoiceController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->persist($invoice);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Factura asignada con éxito.');
             return $this->redirectToRoute('app_invoice_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -58,7 +58,7 @@ class InvoiceController extends AbstractController
 
         if ($form->isSubmitted() && $form->isValid()) {
             $entityManager->flush();
-
+            $this->addFlash('success', 'Factura actualizada con éxito.');
             return $this->redirectToRoute('app_invoice_index', [], Response::HTTP_SEE_OTHER);
         }
 
@@ -75,7 +75,7 @@ class InvoiceController extends AbstractController
             $entityManager->remove($invoice);
             $entityManager->flush();
         }
-
+        $this->addFlash('success', 'Factura eliminada con éxito.');
         return $this->redirectToRoute('app_invoice_index', [], Response::HTTP_SEE_OTHER);
     }
 }
