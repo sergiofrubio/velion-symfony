@@ -25,10 +25,17 @@
 	</div>
 </div>
 
-<div class="mb-3">
-	{{ form_label(registrationForm.birth_date) }}
-	{{ form_widget(registrationForm.birth_date, {'attr': {'class': 'form-control'}}) }}
-	{{ form_errors(registrationForm.birth_date) }}
+<div class="row mb-3">
+	<div class="col">
+		{{ form_label(registrationForm.birth_date) }}
+		{{ form_widget(registrationForm.birth_date, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(registrationForm.birth_date) }}
+	</div>
+	{# <div class="col">
+		{{ form_label(registrationForm.Roles) }}
+		{{ form_widget(registrationForm.Roles, {'attr': {'class': 'form-control'}}) }}
+		{{ form_errors(registrationForm.Roles) }}
+	</div> #}
 </div>
 
 <div class="row mb-3">
