@@ -66,9 +66,30 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Appointment::class, mappedBy: 'patient')]
     private Collection $appointments;
 
+    /**
+     * @var Collection<int, Specialization>
+     */
+    #[ORM\ManyToMany(targetEntity: Specialization::class, inversedBy: 'users')]
+    private Collection $specialization;
+
+    /**
+     * @var Collection<int, Invoice>
+     */
+    #[ORM\OneToMany(targetEntity: Invoice::class, mappedBy: 'customer')]
+    private Collection $invoices;
+
+    /**
+     * @var Collection<int, MedicalReport>
+     */
+    #[ORM\OneToMany(targetEntity: MedicalReport::class, mappedBy: 'patient')]
+    private Collection $medicalReports;
+
     public function __construct()
     {
         $this->appointments = new ArrayCollection();
+        $this->specialization = new ArrayCollection();
+        $this->invoices = new ArrayCollection();
+        $this->medicalReports = new ArrayCollection();
     }
 
     public function getId(): ?string
@@ -274,6 +295,90 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($appointment->getPatient() === $this) {
                 $appointment->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Specialization>
+     */
+    public function getSpecialization(): Collection
+    {
+        return $this->specialization;
+    }
+
+    public function addSpecialization(Specialization $specialization): static
+    {
+        if (!$this->specialization->contains($specialization)) {
+            $this->specialization->add($specialization);
+        }
+
+        return $this;
+    }
+
+    public function removeSpecialization(Specialization $specialization): static
+    {
+        $this->specialization->removeElement($specialization);
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Invoice>
+     */
+    public function getInvoices(): Collection
+    {
+        return $this->invoices;
+    }
+
+    public function addInvoice(Invoice $invoice): static
+    {
+        if (!$this->invoices->contains($invoice)) {
+            $this->invoices->add($invoice);
+            $invoice->setCustomer($this);
+        }
+
+        return $this;
+    }
+
+    public function removeInvoice(Invoice $invoice): static
+    {
+        if ($this->invoices->removeElement($invoice)) {
+            // set the owning side to null (unless already changed)
+            if ($invoice->getCustomer() === $this) {
+                $invoice->setCustomer(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, MedicalReport>
+     */
+    public function getMedicalReports(): Collection
+    {
+        return $this->medicalReports;
+    }
+
+    public function addMedicalReport(MedicalReport $medicalReport): static
+    {
+        if (!$this->medicalReports->contains($medicalReport)) {
+            $this->medicalReports->add($medicalReport);
+            $medicalReport->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeMedicalReport(MedicalReport $medicalReport): static
+    {
+        if ($this->medicalReports->removeElement($medicalReport)) {
+            // set the owning side to null (unless already changed)
+            if ($medicalReport->getPatient() === $this) {
+                $medicalReport->setPatient(null);
             }
         }
 

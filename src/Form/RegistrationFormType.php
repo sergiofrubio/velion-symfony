@@ -22,48 +22,49 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, [
-                'label' => 'Nombre',
+                'label' => 'Name',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('surname', TextType::class, [
-                'label' => 'Apellidos',
+                'label' => 'Surname',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('birth_date', DateType::class, [
                 'widget' => 'single_text',
-                'label' => 'Fecha de nacimiento',
+                'label' => 'Birth date',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('address', TextType::class, [
-                'label' => 'Dirección',
+                'label' => 'Address',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('id', TextType::class, [
-                'label' => 'DNI',
+                'label' => 'ID',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('genre', ChoiceType::class, [
-                'label' => 'Género',
+                'label' => 'Genre',
                 'choices' => [
-                    'Hombre' => 'Hombre',
-                    'Mujer' => 'Mujer',
+                    'Male' => 'Male',
+                    'Female' => 'Female',
                 ],
-                'attr' => ['class' => 'form-control']
+                'attr' => ['class' => 'form-control'],
+                'placeholder' => 'Select genre',
             ])
             ->add('phone', TextType::class, [
-                'label' => 'Teléfono',
+                'label' => 'Phone',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('city', TextType::class, [
-                'label' => 'Municipio',
+                'label' => 'City',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('province', TextType::class, [
-                'label' => 'Provincia',
+                'label' => 'Province',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('zip', TextType::class, [
-                'label' => 'Código postal',
+                'label' => 'Zip',
                 'attr' => ['class' => 'form-control']
             ])
             ->add('email', EmailType::class, [
@@ -73,7 +74,7 @@ class RegistrationFormType extends AbstractType
             ->add('plainPassword', PasswordType::class, [
                 // instead of being set onto the object directly,
                 // this is read and encoded in the controller
-                'label' => 'Contraseña',
+                'label' => 'Password',
                 'attr' => ['class' => 'form-control'],
                 'mapped' => false,
                 // 'attr' => ['autocomplete' => 'new-password'],
@@ -96,6 +97,8 @@ class RegistrationFormType extends AbstractType
                         'message' => 'Debes aceptar los términos y condiciones.',
                     ]),
                 ],
+                'label' => 'Acepto los <a href="/ruta-de-los-terminos-y-condiciones" target="_blank">términos y condiciones</a>',
+                'label_html' => true,
             ]);
     }
 

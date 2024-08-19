@@ -41,12 +41,12 @@
 					<div class="row mb-3">
 						<div class="col">
 							{{ form_label(registrationForm.name) }}
-							{{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nombre'}}) }}
+							{{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Name'}}) }}
 							{{ form_errors(registrationForm.name) }}
 						</div>
 						<div class="col">
 							{{ form_label(registrationForm.surname) }}
-							{{ form_widget(registrationForm.surname, {'attr': {'class': 'form-control', 'placeholder': 'Apellido'}}) }}
+							{{ form_widget(registrationForm.surname, {'attr': {'class': 'form-control', 'placeholder': 'Surname'}}) }}
 							{{ form_errors(registrationForm.surname) }}
 						</div>
 					</div>
@@ -54,7 +54,7 @@
 					<div class="row mb-3">
 						<div class="col">
 							{{ form_label(registrationForm.id) }}
-							{{ form_widget(registrationForm.id, {'attr': {'placeholder': 'DNI'}})  }}
+							{{ form_widget(registrationForm.id, {'attr': {'placeholder': 'ID'}})  }}
 							{{ form_errors(registrationForm.id) }}
 						</div>
 						<div class="col">{{ form_label(registrationForm.genre) }}
@@ -73,12 +73,12 @@
 					<div class="row mb-3">
 						<div class="col">
 							{{ form_label(registrationForm.phone) }}
-							{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+							{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control', 'placeholder': 'Phone'}}) }}
 							{{ form_errors(registrationForm.phone) }}
 						</div>
 						<div class="col">
 							{{ form_label(registrationForm.address) }}
-							{{ form_widget(registrationForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Dirección'}}) }}
+							{{ form_widget(registrationForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Address'}}) }}
 							{{ form_errors(registrationForm.address) }}
 						</div>
 					</div>
@@ -86,19 +86,19 @@
 					<div class="row mb-3">
 						<div class="col">
 							{{ form_label(registrationForm.province) }}
-							{{ form_widget(registrationForm.province, {'attr': {'class': 'form-control', 'placeholder': 'Provincia'}}) }}
+							{{ form_widget(registrationForm.province, {'attr': {'class': 'form-control', 'placeholder': 'Province'}}) }}
 							{{ form_errors(registrationForm.province) }}
 						</div>
 
 						<div class="col">
 							{{ form_label(registrationForm.city) }}
-							{{ form_widget(registrationForm.city, {'attr': {'class': 'form-control', 'placeholder': 'Ciudad'}}) }}
+							{{ form_widget(registrationForm.city, {'attr': {'class': 'form-control', 'placeholder': 'City'}}) }}
 							{{ form_errors(registrationForm.city) }}
 						</div>
 
 						<div class="col">
 							{{ form_label(registrationForm.zip) }}
-							{{ form_widget(registrationForm.zip, {'attr': {'class': 'form-control', 'placeholder': 'Código Postal'}}) }}
+							{{ form_widget(registrationForm.zip, {'attr': {'class': 'form-control', 'placeholder': 'Zip'}}) }}
 							{{ form_errors(registrationForm.zip) }}
 						</div>
 					</div>
@@ -106,13 +106,13 @@
 
 					<div class="mb-3">
 						{{ form_label(registrationForm.email) }}
-						{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
+						{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Email'}}) }}
 						{{ form_errors(registrationForm.email) }}
 					</div>
 
 					<div class="mb-3">
-						{{ form_label(registrationForm.plainPassword, 'Contraseña') }}
-						{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
+						{{ form_label(registrationForm.plainPassword) }}
+						{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Password'}}) }}
 						{{ form_errors(registrationForm.plainPassword) }}
 					</div>
 
@@ -124,7 +124,7 @@
 
 					<div class="mb-3">
 						<button type="submit" class="btn btn-primary">Registrarse</button>
-                        <a href="#" onclick="history.back();" class="btn btn-secondary">Volver atrás</a>
+                        <a href="#" onclick="history.back();" class="btn btn-secondary">Go back</a>
 
 					</div>
 					{{ form_end(registrationForm) }}

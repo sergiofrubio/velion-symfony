@@ -3,12 +3,12 @@
 <div class="row mb-3">
 	<div class="col">
 		{{ form_label(registrationForm.name) }}
-		{{ form_widget(registrationForm.name, {'attr': {'placeholder': 'Nombre'}}) }}
+		{{ form_widget(registrationForm.name)}}
 		{{ form_errors(registrationForm.name) }}
 	</div>
 	<div class="col">
 		{{ form_label(registrationForm.surname) }}
-		{{ form_widget(registrationForm.surname, {'attr': {'class': 'form-control', 'placeholder': 'Apellido'}}) }}
+		{{ form_widget(registrationForm.surname) }}
 		{{ form_errors(registrationForm.surname) }}
 	</div>
 </div>
@@ -16,10 +16,11 @@
 <div class="row mb-3">
 	<div class="col">
 		{{ form_label(registrationForm.id) }}
-		{{ form_widget(registrationForm.id, {'attr': {'placeholder': 'DNI'}})  }}
+		{{ form_widget(registrationForm.id) }}
 		{{ form_errors(registrationForm.id) }}
 	</div>
-	<div class="col">{{ form_label(registrationForm.genre) }}
+	<div class="col">
+		{{ form_label(registrationForm.genre) }}
 		{{ form_widget(registrationForm.genre, {'attr': {'class': 'form-select'}}) }}
 		{{ form_errors(registrationForm.genre) }}
 	</div>
@@ -28,45 +29,65 @@
 <div class="row mb-3">
 	<div class="col">
 		{{ form_label(registrationForm.birth_date) }}
-		{{ form_widget(registrationForm.birth_date, {'attr': {'class': 'form-control'}}) }}
+		{{ form_widget(registrationForm.birth_date) }}
 		{{ form_errors(registrationForm.birth_date) }}
 	</div>
-	{# <div class="col">
-		{{ form_label(registrationForm.Roles) }}
-		{{ form_widget(registrationForm.Roles, {'attr': {'class': 'form-control'}}) }}
-		{{ form_errors(registrationForm.Roles) }}
-	</div> #}
+	<div class="col">
+		{{ form_label(registrationForm.roles) }}
+		<div class="form-control">
+			{% for child in registrationForm.roles %}
+				<div class="form-check form-check-inline">
+					{{ form_widget(child) }}
+					{{ form_label(child, null, {'class': 'form-check-label', 'for': child.vars.id}) }}
+				</div>
+			{% endfor %}
+			{{ form_errors(registrationForm.roles) }}
+		</div>
+	</div>
 </div>
 
 <div class="row mb-3">
 	<div class="col">
 		{{ form_label(registrationForm.phone) }}
-		{{ form_widget(registrationForm.phone, {'attr': {'class': 'form-control', 'placeholder': 'Teléfono'}}) }}
+		{{ form_widget(registrationForm.phone) }}
 		{{ form_errors(registrationForm.phone) }}
 	</div>
 	<div class="col">
 		{{ form_label(registrationForm.address) }}
-		{{ form_widget(registrationForm.address, {'attr': {'class': 'form-control', 'placeholder': 'Dirección'}}) }}
+		{{ form_widget(registrationForm.address) }}
 		{{ form_errors(registrationForm.address) }}
+	</div>
+</div>
+
+<div class="mb-3">
+	{{ form_label(registrationForm.specialization) }}
+	<div class="form-control">
+		{% for child in registrationForm.specialization %}
+			<div class="form-check form-check-inline">
+				{{ form_widget(child) }}
+				{{ form_label(child, null, {'class': 'form-check-label', 'for': child.vars.id}) }}
+			</div>
+		{% endfor %}
+		{{ form_errors(registrationForm.specialization) }}
 	</div>
 </div>
 
 <div class="row mb-3">
 	<div class="col">
 		{{ form_label(registrationForm.province) }}
-		{{ form_widget(registrationForm.province, {'attr': {'class': 'form-control', 'placeholder': 'Provincia'}}) }}
+		{{ form_widget(registrationForm.province) }}
 		{{ form_errors(registrationForm.province) }}
 	</div>
 
 	<div class="col">
 		{{ form_label(registrationForm.city) }}
-		{{ form_widget(registrationForm.city, {'attr': {'class': 'form-control', 'placeholder': 'Ciudad'}}) }}
+		{{ form_widget(registrationForm.city) }}
 		{{ form_errors(registrationForm.city) }}
 	</div>
 
 	<div class="col">
 		{{ form_label(registrationForm.zip) }}
-		{{ form_widget(registrationForm.zip, {'attr': {'class': 'form-control', 'placeholder': 'Código Postal'}}) }}
+		{{ form_widget(registrationForm.zip) }}
 		{{ form_errors(registrationForm.zip) }}
 	</div>
 </div>
@@ -74,21 +95,21 @@
 
 <div class="mb-3">
 	{{ form_label(registrationForm.email) }}
-	{{ form_widget(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'Correo Electrónico'}}) }}
+	{{ form_widget(registrationForm.email) }}
 	{{ form_errors(registrationForm.email) }}
 </div>
 
 <div class="mb-3">
-	{{ form_label(registrationForm.plainPassword, 'Contraseña') }}
-	{{ form_widget(registrationForm.plainPassword, {'attr': {'class': 'form-control', 'placeholder': 'Contraseña'}}) }}
+	{{ form_label(registrationForm.plainPassword) }}
+	{{ form_widget(registrationForm.plainPassword) }}
 	{{ form_errors(registrationForm.plainPassword) }}
 </div>
 
-<div class="mb-3 form-check">
+{# <div class="mb-3 form-check">
 	{{ form_widget(registrationForm.agreeTerms, {'attr': {'class': 'form-check-input'}}) }}
 	{{ form_label(registrationForm.agreeTerms, null, {'attr': {'class': 'form-check-label'}}) }}
 	{{ form_errors(registrationForm.agreeTerms) }}
-</div>
+</div> #}
 
 <div class="mb-3">
 	<button class="btn btn-primary">{{ button_label|default('Guardar') }}</button>

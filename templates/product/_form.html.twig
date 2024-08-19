@@ -1,25 +1,25 @@
 {{ form_start(form) }}
 <div class="mb-3">
 	{{ form_label(form.name) }}
-	{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Nombre'}}) }}
+	{{ form_widget(form.name, {'attr': {'class': 'form-control', 'placeholder': 'Name'}}) }}
 	{{ form_errors(form.name) }}
 </div>
 
 <div class="mb-3">
 	{{ form_label(form.description) }}
-	{{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Descripción'}}) }}
+	{{ form_widget(form.description, {'attr': {'class': 'form-control', 'placeholder': 'Description'}}) }}
 	{{ form_errors(form.description) }}
 </div>
 
 <div class="mb-3">
 	{{ form_label(form.price) }}
-	{{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Precio'}}) }}
+	{{ form_widget(form.price, {'attr': {'class': 'form-control', 'placeholder': 'Price'}}) }}
 	{{ form_errors(form.price) }}
 </div>
 
 <div class="mb-3">
 	{{ form_label(form.category) }}
-	{{ form_widget(form.category, {'attr': {'class': 'form-select', 'placeholder': 'Categoría'}}) }}
+	{{ form_widget(form.category, {'attr': {'class': 'form-select', 'placeholder': 'Category'}}) }}
 	{{ form_errors(form.category) }}
 </div>
 

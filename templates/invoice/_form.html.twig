@@ -1,13 +1,20 @@
 {{ form_start(form) }}
+
+<div class="mb-3">
+	{{ form_label(form.customer) }}
+	{{ form_widget(form.customer, {'attr': {'class': 'form-control'}}) }}
+	{{ form_errors(form.customer) }}
+</div>
+
 <div class="mb-3">
 	{{ form_label(form.status) }}
-	{{ form_widget(form.status, {'attr': {'class': 'form-control', 'placeholder': 'Estado'}}) }}
+	{{ form_widget(form.status, {'attr': {'class': 'form-control'}}) }}
 	{{ form_errors(form.status) }}
 </div>
 
 <div class="mb-3">
 	{{ form_label(form.issue_date) }}
-	{{ form_widget(form.issue_date, {'attr': {'class': 'form-control', 'placeholder': 'Fecha de emisión'}}) }}
+	{{ form_widget(form.issue_date, {'attr': {'class': 'form-control'}}) }}
 	{{ form_errors(form.issue_date) }}
 </div>
 

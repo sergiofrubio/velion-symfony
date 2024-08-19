@@ -37,9 +37,9 @@ class PdfController extends AbstractController
         $pdf->Cell(25, 10, 'Apellidos', 1, 0, 'C'); // Ajustar la anchura de la celda
         $pdf->Cell(20, 10, 'Telefono', 1, 0, 'C'); // Ajustar la anchura de la celda
         $pdf->Cell(25, 10, 'F. Nac.', 1, 0, 'C'); // Ajustar la anchura de la celda
-        $pdf->Cell(70, 10, 'Direccion', 1, 0, 'C'); // Ajustar la anchura de la celda
+        $pdf->Cell(110, 10, 'Direccion', 1, 0, 'C'); // Ajustar la anchura de la celda
         $pdf->Cell(40, 10, 'Email', 1, 0, 'C'); // Ajustar la anchura de la celda
-        $pdf->Cell(40, 10, 'Rol', 1, 0, 'C'); // Reducir la anchura de la celda
+        // $pdf->Cell(40, 10, 'Rol', 1, 0, 'C'); // Reducir la anchura de la celda
         $pdf->Cell(15, 10, 'Genero', 1, 0, 'C'); // Reducir la anchura de la celda
         $pdf->Ln(); // Salto de línea para la siguiente fila
 
@@ -54,9 +54,9 @@ class PdfController extends AbstractController
             $pdf->Cell(25, 10, $usuario->getSurname(), 1, 0, 'L');
             $pdf->Cell(20, 10, $usuario->getPhone(), 1, 0, 'C');
             $pdf->Cell(25, 10, $usuario->getBirthDate()->format('Y-m-d'), 1, 0, 'C');
-            $pdf->Cell(70, 10, $usuario->getAddress() . ', ' . $usuario->getProvince() . ', ' . $usuario->getCity() . ', ' . $usuario->getZip(), 1, 0, 'L');
+            $pdf->Cell(110, 10, $usuario->getAddress() . ', ' . $usuario->getProvince() . ', ' . $usuario->getCity() . ', ' . $usuario->getZip(), 1, 0, 'L');
             $pdf->Cell(40, 10, $usuario->getEmail(), 1, 0, 'L');
-            $pdf->Cell(40, 10, implode(', ', $usuario->getRoles()), 1, 0, 'C');
+            // $pdf->Cell(40, 10, implode(', ', $usuario->getRoles()), 1, 0, 'C');
             $pdf->Cell(15, 10, $usuario->getGenre(), 1, 0, 'C');
             $pdf->Ln(); // Salto de línea para la siguiente fila
         }

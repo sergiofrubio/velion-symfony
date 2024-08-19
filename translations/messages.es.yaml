@@ -4,3 +4,47 @@ Administrador: Administrador
 Paciente: Paciente
 Fisioterapeuta: Fisioterapeuta
 Agree terms: Acepto términos y condiciones del servicio
+Customer: Cliente
+Issue date: Fecha de vencimiento
+Description: Descripción
+Name: Nombre
+Price: Precio
+Category: Categoría
+Patient: Paciente
+Specialization: Especialidad
+Therapist: Fisioterapeuta
+Date: Fecha
+Time: Hora
+Select patient: 	Seleccionar paciente
+Select specialization : 	Seleccionar especialidad
+Select time: 	Seleccionar hora
+Select therapist: Seleccionar fisioterapeuta
+Select customer: Seleccionar cliente
+Select status: Selecionar estado
+Select genre: Seleccionar género
+Surname: Apellidos
+Birth date: Fecha de nacimiento
+Phone: Teléfono
+Address: Dirección
+Province: Provincia
+City: Ciudad
+Zip: Código Postal
+Save: Guardar
+Update: Actualizar
+Delete: Borrar
+Go back: Volver atrás
+Genre: Género
+Password: Contraseña
+ID: ID
+Male: Hombre
+Female: Mujer
+Other: Otro
+Email: Correo electrónico
+User: Usuario
+Admin: Administrador
+Manager: Manager
+Id: ID
+Roles: Roles
+Paid: Pagada
+Pending: Pendiente
+Status: Estado

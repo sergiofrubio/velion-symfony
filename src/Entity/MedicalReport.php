@@ -22,6 +22,14 @@ class MedicalReport
     #[ORM\Column(length: 255)]
     private ?string $notes = null;
 
+    #[ORM\ManyToOne(inversedBy: 'medicalReports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $patient = null;
+
+    #[ORM\ManyToOne(inversedBy: 'medicalReports')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?User $therapist = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -59,6 +67,30 @@ class MedicalReport
     public function setNotes(string $notes): static
     {
         $this->notes = $notes;
+
+        return $this;
+    }
+
+    public function getPatient(): ?User
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?User $patient): static
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getTherapist(): ?User
+    {
+        return $this->therapist;
+    }
+
+    public function setTherapist(?User $therapist): static
+    {
+        $this->therapist = $therapist;
 
         return $this;
     }

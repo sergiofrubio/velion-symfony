@@ -10,8 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 
-#[Route('/appointment')]
+#[Route('/admin/appointment')]
 class AppointmentController extends AbstractController
 {
     #[Route('/', name: 'app_appointment_index', methods: ['GET'])]
@@ -77,5 +78,37 @@ class AppointmentController extends AbstractController
         }
         $this->addFlash('success', 'Cita eliminada con éxito.');
         return $this->redirectToRoute('app_appointment_index', [], Response::HTTP_SEE_OTHER);
+    }
+
+    #[Route("/get-available-times", name: "get_available_times", methods: ['GET'])]
+    public function getAvailableTimes(Request $request, EntityManagerInterface $entityManager): JsonResponse
+    {
+        $date = new \DateTime($request->query->get('date'));
+        $therapistId = (int)$request->query->get('therapist_id');
+
+        // Buscar el terapeuta en la base de datos
+        $therapist = $entityManager->getRepository(User::class)->find($therapistId);
+
+        if (!$therapist) {
+            return new JsonResponse(['error' => 'Therapist not found'], 404);
+        }
+
+        // Obtener las horas disponibles (debes implementar esta lógica)
+        $availableTimes = $this->AvailableTimes($date, $therapist);
+
+        return new JsonResponse($availableTimes);
+    }
+
+    private function AvailableTimes(\DateTimeInterface $date, User $therapist): array
+    {
+        // Aquí implementas la lógica para obtener las horas disponibles
+        // Por ejemplo:
+        return [
+            '09:00' => '09:00',
+            '10:00' => '10:00',
+            '11:00' => '11:00',
+            '14:00' => '14:00',
+            '15:00' => '15:00',
+        ];
     }
 }
