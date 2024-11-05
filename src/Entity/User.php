@@ -67,6 +67,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private Collection $appointments;
 
     /**
+     * @var Collection<int, Appointment>
+     */
+    #[ORM\OneToMany(mappedBy: 'therapist', targetEntity: Appointment::class)]
+    private Collection $appointmentsAsTherapist;
+
+    /**
      * @var Collection<int, Specialization>
      */
     #[ORM\ManyToMany(targetEntity: Specialization::class, inversedBy: 'users')]
@@ -87,6 +93,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->appointments = new ArrayCollection();
+        $this->appointmentsAsTherapist = new ArrayCollection();
         $this->specialization = new ArrayCollection();
         $this->invoices = new ArrayCollection();
         $this->medicalReports = new ArrayCollection();
@@ -295,6 +302,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($appointment->getPatient() === $this) {
                 $appointment->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Appointment>
+     */
+    public function getAppointmentsAsTherapist(): Collection
+    {
+        return $this->appointmentsAsTherapist;
+    }
+
+    public function addAppointmentAsTherapist(Appointment $appointment): static
+    {
+        if (!$this->appointmentsAsTherapist->contains($appointment)) {
+            $this->appointmentsAsTherapist->add($appointment);
+            $appointment->setTherapist($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAppointmentAsTherapist(Appointment $appointment): static
+    {
+        if ($this->appointmentsAsTherapist->removeElement($appointment)) {
+            // set the owning side to null (unless already changed)
+            if ($appointment->getTherapist() === $this) {
+                $appointment->setTherapist(null);
             }
         }
 

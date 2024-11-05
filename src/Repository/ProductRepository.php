@@ -41,12 +41,5 @@ class ProductRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function findAllProducts(){
-        return $this->getEntityManager()
-        ->createQuery(
-            'SELECT p.id, p.name, p.description, p.price
-             FROM App\Entity\Product p'
-        );
-    }
 }
 

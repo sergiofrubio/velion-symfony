@@ -18,7 +18,7 @@ use Symfony\Component\Routing\Attribute\Route;
 class UserController extends AbstractController
 {
     #[Route('/', name: 'app_user_index', methods: ['GET'])]
-    public function index(Request $request, UserRepository $userRepository, PaginatorInterface $paginator): Response
+    public function index(Request $request, UserRepository $userRepository ,PaginatorInterface $paginator): Response
     {
          // Create the filter form
          $filterForm = $this->createForm(UserFilterType::class);

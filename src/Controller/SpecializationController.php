@@ -18,7 +18,7 @@ class SpecializationController extends AbstractController
     #[Route('/', name: 'app_specialization_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator, SpecializationRepository $specializationRepository): Response
     {
-        $query = $specializationRepository->findAllSpecializations();
+        $query = $specializationRepository->findAll();
         $pagination = $paginator->paginate(
             $query, /* query NOT result */
             $request->query->getInt('page', 1), /*page number*/

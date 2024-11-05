@@ -26,7 +26,7 @@ class MedicalReport
     #[ORM\JoinColumn(nullable: false)]
     private ?User $patient = null;
 
-    #[ORM\ManyToOne(inversedBy: 'medicalReports')]
+    #[ORM\ManyToOne(inversedBy: 'appointmentsAsTherapist')]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $therapist = null;
 

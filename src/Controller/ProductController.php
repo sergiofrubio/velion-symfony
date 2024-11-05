@@ -18,10 +18,10 @@ class ProductController extends AbstractController
     #[Route('/', name: 'app_product_index', methods: ['GET'])]
     public function index(Request $request, PaginatorInterface $paginator, ProductRepository $productRepository): Response
     {
-        $query = $productRepository->findAllProducts();
+        $query = $productRepository->findAll();
         $pagination = $paginator->paginate(
-            $query, /* query NOT result */
-            $request->query->getInt('page', 1), /*page number*/
+            $query,
+            $request->query->getInt('page', 1),
             10 /*limit per page*/
         );
         return $this->render('product/index.html.twig', [

@@ -14,7 +14,7 @@ use App\Repository\UserRepository;
 class PdfController extends AbstractController
 {
     #[Route('/user-list', name: 'user_export', methods: ['GET'])]
-    public function exportarUsuariosAPdf(UserRepository $userRepository,): Response
+    public function exportarUsuariosAPdf(UserRepository $userRepository): Response
     {
         // Instanciar un nuevo objeto FPDF
         $pdf = new FPDF('L', 'mm', 'A4'); // Orientación horizontal, unidad de medida en mm, tamaño de página A4

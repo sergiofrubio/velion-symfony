@@ -41,11 +41,4 @@ class SpecializationRepository extends ServiceEntityRepository
     //        ;
     //    }
 
-    public function findAllSpecializations(){
-        return $this->getEntityManager()
-        ->createQuery(
-            'SELECT s.id, s.description
-             FROM App\Entity\Specialization s'
-        );
-    }
 }
