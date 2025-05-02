@@ -49,3 +49,9 @@ Symfony Docker is available under the MIT License.
 ## Credits
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
+
+## Persistencia base de datos
+
+Para mantener la persistencia de la base de datos, antes de parar los contenedores se ha de ejecutar el comando `docker compose exec database pg_dump -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-app} -Fc -f /dump/latest.sql`
+
+Después bastará con ejecutar `docker compose up -d --build` para ver los cambios de la BBDD reflejados.

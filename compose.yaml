@@ -50,6 +50,10 @@ services:
       - database_data:/var/lib/postgresql/data:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
       - ./docker/db/data:/var/lib/postgresql/data:rw
+      # Montamos un directorio local para el dump de la base de datos
+      - ./docker/db/dump:/dump:rw
+      # Montamos el script de inicialización
+      - ./docker/db/init:/docker-entrypoint-initdb.d:rw
     ports:
       - "5432:5432"  # Mapea el puerto del contenedor al puerto 5432 en tu máquina local
 ###< doctrine/doctrine-bundle ###
