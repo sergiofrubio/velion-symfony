@@ -50,8 +50,10 @@ Symfony Docker is available under the MIT License.
 
 Created by [Kévin Dunglas](https://dunglas.dev), co-maintained by [Maxime Helias](https://twitter.com/maxhelias) and sponsored by [Les-Tilleuls.coop](https://les-tilleuls.coop).
 
-## Persistencia base de datos
+## Exportar base de datos
 
-Para mantener la persistencia de la base de datos, antes de parar los contenedores se ha de ejecutar el comando `docker compose exec database pg_dump -U ${POSTGRES_USER:-app} -d ${POSTGRES_DB:-app} -Fc -f /dump/latest.sql`
+Para mantener la persistencia de la base de datos, antes se hace backup de la base de datos desde pgadmin
+
+Después copiamos el backup.sql del contenedor al proyecyto con el comando `docker cp $(docker compose ps -q pgadmin):/var/lib/pgadmin/storage/admin_example.com/backup.sql ./docker/db/dump/backup.sql`
 
 Después bastará con ejecutar `docker compose up -d --build` para ver los cambios de la BBDD reflejados.
