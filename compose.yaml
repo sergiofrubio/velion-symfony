@@ -40,20 +40,26 @@ services:
 
 ###> doctrine/doctrine-bundle ###
   database:
-    image: postgres:${POSTGRES_VERSION:-16}-alpine
+    image: mysql:${MYSQL_VERSION:-8}
     environment:
-      POSTGRES_DB: ${POSTGRES_DB:-app}
+     MYSQL_DATABASE: ${MYSQL_DATABASE:-app}
       # You should definitely change the password in production
-      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-!ChangeMe!}
-      POSTGRES_USER: ${POSTGRES_USER:-app}
+    #  MYSQL_RANDOM_ROOT_PASSWORD: "true"
+    #  MYSQL_PASSWORD: ${MYSQL_PASSWORD:-!ChangeMe!}
+    #  MYSQL_USER: ${MYSQL_USER:-app}
+    healthcheck:
+      test: ["CMD", "mysqladmin" ,"ping", "-h", "localhost"]
+      timeout: 5s
+      retries: 5
+      start_period: 60s
     volumes:
-      - database_data:/var/lib/postgresql/data:rw
+      - database_data:/var/lib/mysql:rw
       # You may use a bind-mounted host directory instead, so that it is harder to accidentally remove the volume and lose all your data!
-      # - ./docker/db/data:/var/lib/postgresql/data:rw
+      # - ./docker/db/data:/var/lib/mysql/data:rw
       # Montamos un directorio local para el dump de la base de datos
       - ./docker/db/dump/backup.sql:/docker-entrypoint-initdb.d/backup.sql
     ports:
-      - "5432:5432"  # Mapea el puerto del contenedor al puerto 5432 en tu máquina local
+      - "3306:3306"  # Mapea el puerto del contenedor al puerto 5432 en tu máquina local
 ###< doctrine/doctrine-bundle ###
 
 volumes:
