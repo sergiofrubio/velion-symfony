@@ -1,0 +1,44 @@
+{
+  "name": "velion-symfony",
+  "version": "1.0.0",
+  "description": "A [Docker](https://www.docker.com/)-based installer and runtime for the [Symfony](https://symfony.com) web framework,\r with [FrankenPHP](https://frankenphp.dev) and [Caddy](https://caddyserver.com/) inside!",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs",
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "webpack --config webpack.config.js",
+    "watch": "webpack --watch --config webpack.config.js",
+    "build": "webpack --mode production --config webpack.config.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sergiofrubio/velion-symfony.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sergiofrubio/velion-symfony/issues"
+  },
+  "homepage": "https://github.com/sergiofrubio/velion-symfony#readme",
+  "devDependencies": {
+    "@symfony/webpack-encore": "^5.1.0",
+    "@vue/compiler-sfc": "^3.5.13",
+    "sass": "^1.87.0",
+    "sass-loader": "^16.0.5",
+    "vue-loader": "^17.3.1",
+    "webpack": "^5.99.7",
+    "webpack-cli": "^5.1.4"
+  },
+  "dependencies": {
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.5",
+    "bootstrap-icons": "^1.12.1",
+    "core-js": "^3.42.0",
+    "vue": "^3.5.13",
+    "vue-router": "^4.5.1"
+  }
+}
