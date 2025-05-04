@@ -7,6 +7,8 @@ import Inicio from '../views/Inicio.vue';
 import Usuarios from '../views/Usuarios.vue';
 import Citas from '../views/Citas.vue';
 import Facturas from '../views/Facturas.vue';
+import Error from '../views/Error.vue';
+
 
 const routes = [
   { path: '/', redirect: '/login' },
@@ -14,7 +16,7 @@ const routes = [
   { path: '/register', component: Register,  name: Register, meta: { title: 'Registro' } },
   { path: '/inicio', component: Dashboard },
   {
-    path: '/',
+    path: '/dashboard',
     component: Dashboard,
     children: [
       {
@@ -42,7 +44,8 @@ const routes = [
         meta: { title: 'Facturas' }
       }
     ]
-  }
+  },
+  { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error },
 ];
 
 const router = createRouter({

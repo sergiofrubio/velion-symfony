@@ -32,7 +32,39 @@
 		</form>
   
 		<div class="mt-3 text-center">
+		  <small>
+			<a href="#" data-bs-toggle="modal" data-bs-target="#modalRecuperar">¿Olvidaste tu contraseña?</a>
+		  </small>
+		</div>
+  
+		<div class="mt-3 text-center">
 		  <small>¿No tienes cuenta? <router-link to="/register">Regístrate</router-link></small>
+		</div>
+	  </div>
+  
+	  <!-- Modal Recuperar Contraseña -->
+	  <div class="modal fade" id="modalRecuperar" tabindex="-1" aria-labelledby="recuperarLabel" aria-hidden="true">
+		<div class="modal-dialog">
+		  <div class="modal-content rounded-4 shadow-sm">
+			<div class="modal-header">
+			  <h5 class="modal-title text-primary fw-semibold" id="recuperarLabel">Recuperar contraseña</h5>
+			  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
+			</div>
+			<div class="modal-body">
+			  <p class="mb-3">Introduce tu correo electrónico y te enviaremos instrucciones para recuperar tu contraseña.</p>
+			  <input
+				type="email"
+				class="form-control"
+				v-model="emailRecuperar"
+				placeholder="ejemplo@correo.com"
+				required
+			  />
+			</div>
+			<div class="modal-footer">
+			  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+			  <button type="button" class="btn btn-primary" @click="enviarRecuperacion">Enviar</button>
+			</div>
+		  </div>
 		</div>
 	  </div>
 	</div>
@@ -44,16 +76,34 @@
 	data() {
 	  return {
 		email: "",
-		password: ""
+		password: "",
+		emailRecuperar: ""
 	  };
 	},
 	methods: {
 	  handleLogin() {
-		/* // Aquí iría la lógica de login (API, token, redirección...)
+		// Aquí iría la lógica de login
 		console.log("Login con:", this.email, this.password);
+		// Simulación de redirección
+		// this.$router.push("/inicio");
+	  },
+	  enviarRecuperacion() {
+		if (!this.emailRecuperar) {
+		  alert("Introduce un correo válido.");
+		  return;
+		}
   
-		// Simulación de login exitoso
-		this.$router.push("/"); */
+		// Aquí iría la lógica para enviar correo de recuperación
+		console.log("Recuperar contraseña para:", this.emailRecuperar);
+		alert("Si el correo existe, recibirás instrucciones.");
+  
+		// Cerrar modal manualmente
+		const modal = bootstrap.Modal.getInstance(document.getElementById('modalRecuperar'));
+		modal.hide();
+		document.body.classList.remove('modal-open');
+		document.querySelectorAll('.modal-backdrop').forEach(el => el.remove());
+  
+		this.emailRecuperar = "";
 	  }
 	}
   };

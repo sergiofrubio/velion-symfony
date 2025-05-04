@@ -42,10 +42,10 @@
     data() {
       return {
         menu: [
-        { text: "Inicio", route: "/inicio", icon: "bi bi-house-door-fill" },
-        { text: "Usuarios", route: "/usuarios", icon: "bi bi-people-fill" },
-        { text: "Citas", route: "/citas", icon: "bi bi-calendar-check-fill" },
-        { text: "Facturas", route: "/facturas", icon: "bi bi-receipt-cutoff" }
+        { text: "Inicio", route: "/dashboard/inicio", icon: "bi bi-house-door-fill" },
+        { text: "Usuarios", route: "/dashboard/usuarios", icon: "bi bi-people-fill" },
+        { text: "Citas", route: "/dashboard/citas", icon: "bi bi-calendar-check-fill" },
+        { text: "Facturas", route: "/dashboard/facturas", icon: "bi bi-receipt-cutoff" }
         ]
       };
     },

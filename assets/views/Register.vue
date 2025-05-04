@@ -1,100 +1,99 @@
 <template>
-    <div class="login-container">
-    {% if error %}
-        <div class="alert alert-warning d-flex align-items-center" role="alert">
-            <div>
-                {{ error.messageKey|trans(error.messageData, 'security') }}
-            </div>
+    <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
+      <div class="card shadow-sm p-4 p-md-5 rounded-4" style="max-width: 400px; width: 100%;">
+        <h2 class="mb-4 text-center text-primary fw-semibold">Crear cuenta</h2>
+  
+        <form @submit.prevent="handleRegister">
+          <div class="mb-3">
+            <label for="nombre" class="form-label fw-medium">Nombre completo</label>
+            <input
+              type="text"
+              class="form-control"
+              id="nombre"
+              v-model="nombre"
+              placeholder="Tu nombre"
+              required
+            />
+          </div>
+  
+          <div class="mb-3">
+            <label for="email" class="form-label fw-medium">Correo electrónico</label>
+            <input
+              type="email"
+              class="form-control"
+              id="email"
+              v-model="email"
+              placeholder="ejemplo@correo.com"
+              required
+            />
+          </div>
+  
+          <div class="mb-3">
+            <label for="password" class="form-label fw-medium">Contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="password"
+              v-model="password"
+              placeholder="********"
+              required
+            />
+          </div>
+  
+          <div class="mb-4">
+            <label for="confirmar" class="form-label fw-medium">Confirmar contraseña</label>
+            <input
+              type="password"
+              class="form-control"
+              id="confirmar"
+              v-model="confirmar"
+              placeholder="********"
+              required
+            />
+          </div>
+  
+          <button type="submit" class="btn btn-primary w-100 fw-medium">Registrarse</button>
+        </form>
+  
+        <div class="mt-3 text-center">
+          <small>¿Ya tienes cuenta? <router-link to="/login">Inicia sesión</router-link></small>
         </div>
-    {% endif %}
-    <h2 class="text-center">Inicia sesión</h2>
-    <form action="{{ path('app_login') }}" method="post">
-        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
-        <input type="hidden" name="_target_path" value="/admin/home">
-        <div class="mb-3">
-            <label for="username" class="form-label">Email</label>
-            <input type="text" class="form-control" name="_username" id="username" value="{{ last_username }}" required>
-        </div>
-        <div class="mb-3">
-            <label for="password" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" name="_password" id="password" required>
-        </div>
-        <button type="submit" class="btn btn-primary w-100">Iniciar Sesión</button>
-    </form>
-    <div class="mt-3 d-flex justify-content-between">
-        <a href="{{ path('app_register')}}" class="btn btn-link">Regístrate</a>
-        <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="btn btn-link">Recuperar contraseña</a>
+      </div>
     </div>
-
-</div>
-
-<!-- Modal -->
-<div class="modal fade" id="exampleModal" tabindex="-1">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Recuperar Contraseña</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <form action="" method="post">
-                <div class="modal-body">
-                    <label for="resetEmail" class="form-label">Correo electrónico</label>
-                    <input type="email" class="form-control" id="resetEmail" name="resetEmail" required>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Enviar</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
-</template>
-
-<script>
-export default {
-name: 'Register',
-};
-</script>
-
-<style>
-body {
-/*background-image: url({{ asset('fondo.jpg') }});
-/* Reemplaza con la ruta de tu imagen */
-background-size: cover;
-background-position: center;
-height: 100vh;
-display: flex;
-justify-content: center;
-align-items: center;
-}
-
-.login-container {
-background: rgba(255, 255, 255, 0.8);
-padding: 30px;
-border-radius: 8px;
-box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-max-width: 400px;
-width: 100%;
-}
-
-.login-container h2 {
-margin-bottom: 20px;
-font-weight: bold;
-}
-
-.form-control:focus {
-box-shadow: none;
-border-color: #495057;
-}
-
-.btn-primary {
-background-color: #007bff;
-border-color: #007bff;
-}
-
-.btn-link {
-color: #007bff;
-text-decoration: none;
-/* Quitar subrayado de los enlaces */
-}
-</style>
+  </template>
+  
+  <script>
+  export default {
+    name: "Register",
+    data() {
+      return {
+        nombre: "",
+        email: "",
+        password: "",
+        confirmar: ""
+      };
+    },
+    methods: {
+      handleRegister() {
+        if (this.password !== this.confirmar) {
+          alert("Las contraseñas no coinciden.");
+          return;
+        }
+  
+        // Aquí iría la lógica de registro real (API, validaciones, etc.)
+        console.log("Registro con:", this.nombre, this.email, this.password);
+  
+        // Simulación de redirección tras registro
+        this.$router.push("/login");
+      }
+    }
+  };
+  </script>
+  
+  <style scoped>
+  input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+  }
+  </style>
+  
