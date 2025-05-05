@@ -17,10 +17,10 @@ security:
             lazy: true
             provider: app_user_provider
 
-            form_login:
-                login_path: app_login
-                check_path: app_login
-                enable_csrf: true
+            # form_login:
+            #     login_path: app_login
+            #     check_path: app_login
+            #     enable_csrf: true
 
             json_login:
                 # api_login is a route we will create below
@@ -30,8 +30,6 @@ security:
 
             logout:
                 path: /logout
-
-                # where to redirect after logout
                 target: /login
 
             # activate different ways to authenticate
@@ -47,7 +45,7 @@ security:
         # - { path: ^/a, roles: ROLE_USER }
         # - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         # - { path: ^/register, roles: IS_AUTHENTICATED_ANONYMOUSLY }
-        - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
+        # - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         # - { path: ^/dashboard, roles: IS_AUTHENTICATED_FULLY }
 
 when@test:

@@ -83,10 +83,11 @@ export default {
 
 					// Guardar token en localStorage o sessionStorage
 					localStorage.setItem('token', data.token);
-					localStorage.setItem('user', data.user);
+					localStorage.setItem('userName', data.userName);
+					localStorage.setItem('userId', data.userId);
 
 					// Redirigir al dashboard
-					this.$router.push('/dashboard/inicio');
+					this.$router.push('/inicio');
 				})
 				.catch(err => {
 					alert(err.message);

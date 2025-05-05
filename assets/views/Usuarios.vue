@@ -128,6 +128,7 @@
     watch: {
       filtro() {
         this.paginaActual = 1; // reiniciar a página 1 cuando filtras
+        console.log(localStorage.getItem('user'));
       }
     }
   };

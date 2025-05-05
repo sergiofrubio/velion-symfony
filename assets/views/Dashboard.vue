@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex" id="dashboard-layout">
+  <div class="d-flex" id="layout">
     <!-- Sidebar -->
     <aside class="sidebar bg-white border-end shadow-sm">
       <div class="p-4">
@@ -23,12 +23,12 @@
     <main class="flex-grow-1 p-4 bg-light min-vh-100">
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-semibold text-dark">{{ currentTitle }}</h2>
-        <button class="btn btn-outline-primary">Cerrar sesión</button>
+        <h2 class="fw-semibold text-dark">{{ currentUserName }}</h2>
+        <button  @click="logout" class="btn btn-outline-primary">Cerrar sesión</button>
       </div>
 
       <!-- Page content slot -->
-      <div class="card p-4 shadow-sm rounded bg-white">
+      <div class="card p-4 shadow-sm rounded bg-white" style="height: 90vh;">
         <router-view />
       </div>
     </main>
@@ -38,27 +38,38 @@
   
   <script>
   export default {
-    name: "DashboardLayout",
+    name: "Dashboard",
     data() {
       return {
         menu: [
-        { text: "Inicio", route: "/dashboard/inicio", icon: "bi bi-house-door-fill" },
-        { text: "Usuarios", route: "/dashboard/usuarios", icon: "bi bi-people-fill" },
-        { text: "Citas", route: "/dashboard/citas", icon: "bi bi-calendar-check-fill" },
-        { text: "Facturas", route: "/dashboard/facturas", icon: "bi bi-receipt-cutoff" }
+        { text: "Inicio", route: "/inicio", icon: "bi bi-house-door-fill" },
+        { text: "Usuarios", route: "/usuarios", icon: "bi bi-people-fill" },
+        { text: "Citas", route: "/citas", icon: "bi bi-calendar-check-fill" },
+        { text: "Facturas", route: "/facturas", icon: "bi bi-receipt-cutoff" },
+        { text: "Configuración", route: "/configuracion", icon: "bi bi-gear" }
         ]
       };
     },
+    methods: {
+      logout() {
+        // Borrar el token y el usuario del almacenamiento
+        localStorage.removeItem('token');
+        localStorage.removeItem('user');
+
+        // Redirigir al login
+        this.$router.push('/login');
+      }
+    },
     computed: {
-    currentTitle() {
-      return this.$route.meta.title || '';
+    currentUserName() {
+      return 'Bienvenid@, '+localStorage.getItem('userName');
     }
   }
   };
   </script>
   
   <style scoped>
-  #dashboard-layout {
+  #layout {
     height: 100vh;
     overflow: hidden;
   }

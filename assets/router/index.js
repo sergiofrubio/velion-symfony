@@ -7,6 +7,7 @@ import Inicio from '../views/Inicio.vue';
 import Usuarios from '../views/Usuarios.vue';
 import Citas from '../views/Citas.vue';
 import Facturas from '../views/Facturas.vue';
+import Config from '../views/Config.vue';
 import Error from '../views/Error.vue';
 
 
@@ -14,37 +15,11 @@ const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login, name: Login, meta: { title: 'Login' } },
   { path: '/register', component: Register,  name: Register, meta: { title: 'Registro' } },
-  { path: '/inicio', component: Dashboard },
-  {
-    path: '/dashboard',
-    component: Dashboard,
-    children: [
-      {
-        path: 'inicio',
-        component: Inicio,
-        name: 'Inicio',
-        meta: { title: 'Inicio' }
-      },
-      {
-        path: 'usuarios',
-        component: Usuarios,
-        name: 'Usuarios',
-        meta: { title: 'Usuarios' }
-      },
-      {
-        path: 'citas',
-        component: Citas,
-        name: 'Citas',
-        meta: { title: 'Citas' }
-      },
-      {
-        path: 'facturas',
-        component: Facturas,
-        name: 'Facturas',
-        meta: { title: 'Facturas' }
-      }
-    ]
-  },
+  { path: '/inicio', component: Dashboard, children: [{ path: '', component: Inicio }], meta: { requiresAuth: true } },
+  { path: '/usuarios', component: Dashboard, children: [{ path: '', component: Usuarios }], meta: { requiresAuth: true } },
+  { path: '/citas', component: Dashboard, children: [{ path: '', component: Citas }], meta: { requiresAuth: true } },
+  { path: '/facturas', component: Dashboard, children: [{ path: '', component: Facturas }], meta: { requiresAuth: true } },
+  { path: '/configuracion', component: Dashboard, children: [{ path: '', component: Config }], meta: { requiresAuth: true } },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error },
 ];
 
@@ -57,14 +32,14 @@ const router = createRouter({
 router.beforeEach((to, from, next) => {
   const token = localStorage.getItem('token');
 
-  if (to.meta.requiresAuth && !token) {
-    next({ name: 'NotFound' });
-  } else if ((to.name === 'login' || to.name === 'register') && token) {
-    // si ya estás loggeado, no puedes volver a login o registro
-    next({ name: 'dashboard' });
-  } else {
-    next();
+  if (to.matched.some(record => record.meta.requiresAuth)) {
+    if (!token) {
+      // Redirige a login si no está autenticado
+      return next('/login');
+    }
   }
+
+  next();
 });
 
 router.afterEach((to) => {

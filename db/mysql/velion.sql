@@ -2,10 +2,10 @@
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: 127.0.0.1
--- Tiempo de generación: 04-05-2025 a las 11:20:30
+-- Servidor: localhost
+-- Tiempo de generación: 05-05-2025 a las 16:41:17
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -216,11 +216,11 @@ CREATE TABLE `user` (
   `province` varchar(255) DEFAULT NULL,
   `zip` int(11) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
-  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL COMMENT '(DC2Type:json)' CHECK (json_valid(`roles`)),
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL COMMENT '(DC2Type:json)',
   `password` varchar(255) NOT NULL,
-  `genre` varchar(255) NOT NULL,
+  `genre` varchar(255) DEFAULT NULL,
   `phone` int(11) DEFAULT NULL,
-  `is_verified` tinyint(1) NOT NULL
+  `is_verified` tinyint(1) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -228,7 +228,8 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id`, `name`, `surname`, `birth_date`, `address`, `city`, `province`, `zip`, `email`, `roles`, `password`, `genre`, `phone`, `is_verified`) VALUES
-('1', 'Sergio', 'Física Rubio', '2003-07-04', 'General Lázaro Cárdenas, 1 7 3 A', 'Córdoba', 'Córdoba', 14013, 'sergiofrubio@gmail.com', '[\"ROLE_ADMIN\"]', '$2y$13$9IoQLDuCIZU/oOG2ZtEAZukzVwAeCAx5VQ1gFwBzikDvvIzXaJaLK', 'Hombre', 643159006, 1);
+('31896518A', 'Sergio', 'Físcia', '2003-07-04', 'Calle 123', 'Cordoba', 'Cordoba', 14013, 'sergiofrubio@gmail.com', '[]', '$2y$13$M1AlIRxiH6oFqjeJFPTzCOPJ8C.Hu9Dl2Qi7Ezf994kuaolg/Q2SC', 'masculino', 600000000, 0),
+('Admin', 'Admin', NULL, NULL, NULL, NULL, NULL, NULL, 'admin@example.com', '[]', '$2y$13$onB4kFmmQB7MpEaTZocaGuGMSgm3h.qKFWtAp2U8XrHOB64Pr371u', NULL, NULL, 0);
 
 -- --------------------------------------------------------
 

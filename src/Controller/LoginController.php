@@ -12,9 +12,9 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
-final class ApiLoginController extends AbstractController
+final class LoginController extends AbstractController
 {
-    #[Route('/api/login', name: 'app_api_login', methods: ['POST'])]
+    #[Route('/api/login', name: 'app_login', methods: ['POST'])]
     public function login(
         Request $request,
         EntityManagerInterface $em,
@@ -41,7 +41,8 @@ final class ApiLoginController extends AbstractController
         // Aquí puedes devolver datos básicos del usuario, o un token JWT si configuras JWT más adelante
         return new JsonResponse([
             'success' => true,
-            'user'  => $user->getUserIdentifier(),
+            'userId'  => $user->getId(),
+            'userName' => $user->getName(),
             'token' => $token,
         ]);
     }
