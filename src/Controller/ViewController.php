@@ -6,14 +6,13 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Attribute\Route;
 
-class AppController extends AbstractController
+class ViewController extends AbstractController
 {
     #[Route('/{vueRouting}', name: 'vue_app', requirements: ['vueRouting' => '^(?!api).*$'])]
     public function index(): Response
     {
         return $this->render('base.html.twig');
     }
-
 
 }
 

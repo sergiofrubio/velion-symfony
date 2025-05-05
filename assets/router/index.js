@@ -53,6 +53,20 @@ const router = createRouter({
   routes,
 });
 
+// 👇 Este es el guard que protege las rutas
+router.beforeEach((to, from, next) => {
+  const token = localStorage.getItem('token');
+
+  if (to.meta.requiresAuth && !token) {
+    next({ name: 'NotFound' });
+  } else if ((to.name === 'login' || to.name === 'register') && token) {
+    // si ya estás loggeado, no puedes volver a login o registro
+    next({ name: 'dashboard' });
+  } else {
+    next();
+  }
+});
+
 router.afterEach((to) => {
   document.title = to.meta.title || 'Mi Panel';
 });

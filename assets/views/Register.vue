@@ -74,19 +74,36 @@
       };
     },
     methods: {
-      handleRegister() {
-        if (this.password !== this.confirmar) {
-          alert("Las contraseñas no coinciden.");
-          return;
-        }
-  
-        // Aquí iría la lógica de registro real (API, validaciones, etc.)
-        console.log("Registro con:", this.nombre, this.email, this.password);
-  
-        // Simulación de redirección tras registro
-        this.$router.push("/login");
-      }
+  handleRegister() {
+    if (this.password !== this.confirmar) {
+      alert("Las contraseñas no coinciden.");
+      return;
     }
+
+    fetch('/api/register', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        nombre: this.nombre,
+        email: this.email,
+        password: this.password
+      })
+    })
+      .then(async response => {
+        const data = await response.json();
+
+        if (!response.ok) {
+          throw new Error(data.message || 'Error al registrarse');
+        }
+
+        alert('Registro exitoso. Ahora puedes iniciar sesión.');
+        this.$router.push('/login');
+      })
+      .catch(err => {
+        alert(err.message);
+      });
+  }
+}
   };
   </script>
   
