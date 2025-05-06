@@ -2,12 +2,14 @@
 	<div>
 	  <div class="d-flex justify-content-between align-items-center mb-3">
 		<h3 class="fw-semibold">Gestión de Facturas</h3>
-		<input
-		  type="text"
-		  class="form-control w-25"
-		  v-model="filtro"
-		  placeholder="Buscar por cliente o estado"
-		/>
+		<div class="d-flex align-items-center gap-3">
+          <input
+            type="text"
+            class="form-control filter-input" v-model="filtro"
+            placeholder="Buscar por nombre o rol"
+          />
+          <button class="btn btn-success grow-1 bi bi-plus-circle" @click="nuevaFactura">Añadir factura</button>
+        </div>
 	  </div>
   
 	  <div class="table-responsive">
@@ -34,8 +36,10 @@
 				</span>
 			  </td>
 			  <td class="text-end">
-				<button class="btn btn-sm btn-outline-primary me-2">Ver</button>
-				<button class="btn btn-sm btn-outline-danger">Eliminar</button>
+				<button class="btn btn-sm btn-outline-primary me-2 bi bi-download">
+                </button>
+                <button class="btn btn-sm btn-outline-danger bi bi-trash">
+                </button>
 			  </td>
 			</tr>
 			<tr v-if="facturasFiltradas.length === 0">
@@ -112,3 +116,23 @@
   };
   </script>
   
+  <style scoped>
+  .table th,
+  .table td {
+    vertical-align: middle;
+  }
+  .filter-input {
+      width: 200px; /* Puedes ajustar este valor según prefieras */
+      /* O usando flexbox para un control más fino: */
+      /* flex-basis: 200px; */
+      /* flex-grow: 0; */
+      /* flex-shrink: 0; */
+  }
+
+  /* Opcional: hacer el input más ancho en pantallas grandes */
+  @media (min-width: 768px) { /* En pantallas medianas o más grandes */
+    .filter-input {
+      width: 250px; /* O un valor mayor */
+    }
+  }
+</style>

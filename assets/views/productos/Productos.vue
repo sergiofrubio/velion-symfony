@@ -1,7 +1,7 @@
 <template>
     <div>
       <div class="d-flex justify-content-between align-items-center mb-3">
-        <h3 class="fw-semibold">Gestión de Usuarios</h3>
+        <h3 class="fw-semibold">Gestión de Productos</h3>
         <input
           type="text"
           class="form-control w-25"
@@ -40,11 +40,9 @@
                 </span>
               </td>
               <td class="text-end">
-                <button class="btn btn-sm btn-outline-primary me-2">
-                  Editar
+                <button class="btn btn-sm btn-outline-primary me-2 bi bi-pencil-square">
                 </button>
-                <button class="btn btn-sm btn-outline-danger">
-                  Eliminar
+                <button class="btn btn-sm btn-outline-danger bi bi-trash">
                 </button>
               </td>
             </tr>
