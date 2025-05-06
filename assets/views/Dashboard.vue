@@ -24,11 +24,11 @@
       <!-- Header -->
       <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="fw-semibold text-dark">{{ currentUserName }}</h2>
-        <button  @click="logout" class="btn btn-outline-primary">Cerrar sesión</button>
+        <button  @click="logout" class="btn btn-outline-danger bi bi-box-arrow-right"></button>
       </div>
 
       <!-- Page content slot -->
-      <div class="card p-4 shadow-sm rounded bg-white" style="height: 90vh;">
+      <div class="card p-4 shadow-sm rounded bg-white" style="height: 85vh;">
         <router-view />
       </div>
     </main>
