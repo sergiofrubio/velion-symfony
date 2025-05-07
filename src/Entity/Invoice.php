@@ -22,10 +22,6 @@ class Invoice
     #[ORM\Column(length: 255)]
     private ?string $status = null;
 
-    #[ORM\ManyToOne(inversedBy: 'invoices')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $customer = null;
-
     /**
      * @var Collection<int, Product>
      */
@@ -62,18 +58,6 @@ class Invoice
     public function setStatus(string $status): static
     {
         $this->status = $status;
-
-        return $this;
-    }
-
-    public function getCustomer(): ?User
-    {
-        return $this->customer;
-    }
-
-    public function setCustomer(?User $customer): static
-    {
-        $this->customer = $customer;
 
         return $this;
     }

@@ -18,15 +18,9 @@ class Specialization
     #[ORM\Column(length: 255)]
     private ?string $description = null;
 
-    /**
-     * @var Collection<int, User>
-     */
-    #[ORM\ManyToMany(targetEntity: User::class, mappedBy: 'specialization')]
-    private Collection $users;
-
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+
     }
 
     public function getId(): ?int
@@ -42,33 +36,6 @@ class Specialization
     public function setDescription(string $description): static
     {
         $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection<int, User>
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): static
-    {
-        if (!$this->users->contains($user)) {
-            $this->users->add($user);
-            $user->addSpecialization($this);
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): static
-    {
-        if ($this->users->removeElement($user)) {
-            $user->removeSpecialization($this);
-        }
 
         return $this;
     }

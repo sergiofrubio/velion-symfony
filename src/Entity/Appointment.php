@@ -23,20 +23,20 @@ class Appointment
     #[ORM\Column]
     private ?int $duration = null;
 
-    #[ORM\ManyToOne(inversedBy: 'appointments')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $patient = null;
-
-    #[ORM\ManyToOne(inversedBy: 'appointmentsAsTherapist')]
-    #[ORM\JoinColumn(nullable: false)]
-    private ?User $therapist = null;
-
     #[ORM\ManyToOne]
     #[ORM\JoinColumn(nullable: false)]
     private ?Specialization $specialization = null;
 
     #[ORM\Column(length: 255)]
     private ?string $Status = null;
+
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?PatientProfile $patient = null;
+
+    #[ORM\ManyToOne(inversedBy: 'appointments')]
+    #[ORM\JoinColumn(nullable: false)]
+    private ?DoctorProfile $doctor = null;
 
     public function getId(): ?int
     {
@@ -79,31 +79,6 @@ class Appointment
         return $this;
     }
 
-    public function getPatient(): ?User
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(?User $patient): static
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
-
-    public function getTherapist(): ?User
-    {
-        return $this->therapist;
-    }
-
-
-    public function setTherapist(?User $therapist): static
-    {
-        $this->therapist = $therapist;
-
-        return $this;
-    }
-
     public function getSpecialization(): ?Specialization
     {
         return $this->specialization;
@@ -124,6 +99,30 @@ class Appointment
     public function setStatus(string $Status): static
     {
         $this->Status = $Status;
+
+        return $this;
+    }
+
+    public function getPatient(): ?PatientProfile
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?PatientProfile $patient): static
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getDoctor(): ?DoctorProfile
+    {
+        return $this->doctor;
+    }
+
+    public function setDoctor(?DoctorProfile $doctor): static
+    {
+        $this->doctor = $doctor;
 
         return $this;
     }
