@@ -74,11 +74,12 @@ export default {
   data() {
     return {
       menu: [
-        { text: "Inicio", route: "/inicio", icon: "bi bi-house-door-fill" },
-        { text: "Usuarios", route: "/usuarios", icon: "bi bi-people-fill" },
-        { text: "Citas", route: "/citas", icon: "bi bi-calendar-check-fill" },
-        { text: "Facturas", route: "/facturas", icon: "bi bi-receipt-cutoff" },
-        { text: "Configuración", route: "/configuracion", icon: "bi bi-gear" }
+        { text: "Inicio", route: "/start", icon: "bi bi-house-door-fill" },
+        { text: "Usuarios", route: "/users", icon: "bi bi-people-fill" },
+        { text: "Citas", route: "/appointments", icon: "bi bi-calendar-check-fill" },
+        { text: "Productos", route: "/products", icon: "bi bi-bag" },
+        { text: "Facturas", route: "/invoices", icon: "bi bi-receipt-cutoff" },
+        { text: "Configuración", route: "/settings", icon: "bi bi-gear" }
       ],
       notifications: [
         { text: "Tienes una cita nueva", read: false },

@@ -1,28 +1,30 @@
 import { createRouter, createWebHistory } from 'vue-router';
 
-import Login from '../views/Login.vue';
-import Register from '../views/Register.vue';
+import Login from '../views/auth/Login.vue';
+import Register from '../views/auth/Register.vue';
 import Dashboard from '../views/Dashboard.vue';
-import Inicio from '../views/Inicio.vue';
-import Usuarios from '../views/usuarios/Usuarios.vue';
-import UserForm from '../views/usuarios/UserForm.vue';
-import Citas from '../views/citas/Citas.vue';
-import Facturas from '../views/Facturas.vue';
+import Start from '../views/Start.vue';
+import Users from '../views/user/User.vue';
+import UserForm from '../views/user/UserForm.vue';
+import Appointment from '../views/appointment/Appointment.vue';
+import Invoice from '../views/invoice/Invoice.vue';
+import InvoiceForm from '../views/invoice/InvoiceForm.vue';
 import Config from '../views/Config.vue';
-import Error from '../views/Error.vue';
+import Error from '../views/404.vue';
 
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: Login, name: Login, meta: { title: 'Login' } },
-  { path: '/register', component: Register,  name: Register, meta: { title: 'Registro' } },
-  { path: '/inicio', component: Dashboard, children: [{ path: '', component: Inicio }], meta: { requiresAuth: true } },
-  { path: '/usuarios', component: Dashboard, children: [{ path: '', component: Usuarios }], meta: { requiresAuth: true } },
-  { path: '/usuarios/nuevo', component: Dashboard, children: [{ path: '', component: UserForm }], meta: { requiresAuth: true } },
-  { path: '/usuarios/:id/editar', component: Dashboard, children: [{ path: '', component: UserForm }], meta: { requiresAuth: true }, props: true },
-  { path: '/citas', component: Dashboard, children: [{ path: '', component: Citas }], meta: { requiresAuth: true } },
-  { path: '/facturas', component: Dashboard, children: [{ path: '', component: Facturas }], meta: { requiresAuth: true } },
-  { path: '/configuracion', component: Dashboard, children: [{ path: '', component: Config }], meta: { requiresAuth: true } },
+  // { path: '/register', component: Register,  name: Register, meta: { title: 'Registro' } },
+  { path: '/start', component: Dashboard, children: [{ path: '', component: Start }], meta: { requiresAuth: true } },
+  { path: '/users', component: Dashboard, children: [{ path: '', component: Users }], meta: { requiresAuth: true } },
+  { path: '/users/new', component: Dashboard, children: [{ path: '', component: UserForm }], meta: { requiresAuth: true } },
+  { path: '/users/:id/edit', component: Dashboard, children: [{ path: '', component: UserForm }], meta: { requiresAuth: true }, props: true },
+  { path: '/appointments', component: Dashboard, children: [{ path: '', component: Appointment }], meta: { requiresAuth: true } },
+  { path: '/invoices', component: Dashboard, children: [{ path: '', component: Invoice }], meta: { requiresAuth: true } },
+  { path: '/invoices/new', component: Dashboard, children: [{ path: '', component: InvoiceForm }], meta: { requiresAuth: true } },
+  { path: '/settings', component: Dashboard, children: [{ path: '', component: Config }], meta: { requiresAuth: true } },
   { path: '/:pathMatch(.*)*', name: 'NotFound', component: Error },
 ];
 

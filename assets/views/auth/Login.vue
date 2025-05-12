@@ -87,7 +87,7 @@ export default {
 					localStorage.setItem('userId', data.userId);
 
 					// Redirigir al dashboard
-					this.$router.push('/inicio');
+					this.$router.push('/start');
 				})
 				.catch(err => {
 					alert(err.message);
