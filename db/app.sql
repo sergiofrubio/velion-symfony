@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.2
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
--- Servidor: database
--- Tiempo de generación: 12-05-2025 a las 18:31:36
--- Versión del servidor: 8.4.5
--- Versión de PHP: 8.2.28
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 21-05-2025 a las 18:48:00
+-- Versión del servidor: 10.4.32-MariaDB
+-- Versión de PHP: 8.2.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -28,14 +28,14 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `appointment` (
-  `id` int NOT NULL,
-  `specialization_id` int NOT NULL,
-  `patient_id` int NOT NULL,
-  `therapist_id` int NOT NULL,
+  `id` int(11) NOT NULL,
+  `specialization_id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
-  `duration` int NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `duration` int(11) NOT NULL,
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -45,9 +45,9 @@ CREATE TABLE `appointment` (
 --
 
 CREATE TABLE `category` (
-  `id` int NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -66,13 +66,13 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `therapist_profile`
+-- Estructura de tabla para la tabla `doctor_profile`
 --
 
-CREATE TABLE `therapist_profile` (
-  `id` int NOT NULL,
-  `user_id` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `license_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+CREATE TABLE `doctor_profile` (
+  `id` int(11) NOT NULL,
+  `user_id` varchar(9) NOT NULL,
+  `license_number` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -82,10 +82,10 @@ CREATE TABLE `therapist_profile` (
 --
 
 CREATE TABLE `doctrine_migration_versions` (
-  `version` varchar(191) COLLATE utf8mb3_unicode_ci NOT NULL,
+  `version` varchar(191) NOT NULL,
   `executed_at` datetime DEFAULT NULL,
-  `execution_time` int DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
+  `execution_time` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -94,9 +94,9 @@ CREATE TABLE `doctrine_migration_versions` (
 --
 
 CREATE TABLE `invoice` (
-  `id` int NOT NULL,
+  `id` int(11) NOT NULL,
   `issue_date` date NOT NULL,
-  `status` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `status` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -106,8 +106,8 @@ CREATE TABLE `invoice` (
 --
 
 CREATE TABLE `invoice_product` (
-  `invoice_id` int NOT NULL,
-  `product_id` int NOT NULL
+  `invoice_id` int(11) NOT NULL,
+  `product_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -117,12 +117,12 @@ CREATE TABLE `invoice_product` (
 --
 
 CREATE TABLE `medical_report` (
-  `id` int NOT NULL,
-  `patient_id` int NOT NULL,
-  `therapist_id` int NOT NULL,
-  `diagnosis` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `treatment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `notes` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `patient_id` int(11) NOT NULL,
+  `doctor_id` int(11) NOT NULL,
+  `diagnosis` varchar(255) NOT NULL,
+  `treatment` varchar(255) NOT NULL,
+  `notes` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -132,10 +132,10 @@ CREATE TABLE `medical_report` (
 --
 
 CREATE TABLE `messenger_messages` (
-  `id` bigint NOT NULL,
-  `body` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `headers` longtext COLLATE utf8mb4_unicode_ci NOT NULL,
-  `queue_name` varchar(190) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` bigint(20) NOT NULL,
+  `body` longtext NOT NULL,
+  `headers` longtext NOT NULL,
+  `queue_name` varchar(190) NOT NULL,
   `created_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `available_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `delivered_at` datetime DEFAULT NULL COMMENT '(DC2Type:datetime_immutable)'
@@ -148,9 +148,9 @@ CREATE TABLE `messenger_messages` (
 --
 
 CREATE TABLE `patient_profile` (
-  `id` int NOT NULL,
-  `user_id` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `allergies` longtext COLLATE utf8mb4_unicode_ci
+  `id` int(11) NOT NULL,
+  `user_id` varchar(9) NOT NULL,
+  `allergies` longtext DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
@@ -160,11 +160,11 @@ CREATE TABLE `patient_profile` (
 --
 
 CREATE TABLE `product` (
-  `id` int NOT NULL,
-  `category_id` int DEFAULT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `price` int NOT NULL
+  `id` int(11) NOT NULL,
+  `category_id` int(11) DEFAULT NULL,
+  `name` varchar(255) NOT NULL,
+  `description` varchar(255) NOT NULL,
+  `price` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -195,10 +195,10 @@ INSERT INTO `product` (`id`, `category_id`, `name`, `description`, `price`) VALU
 --
 
 CREATE TABLE `reset_password_request` (
-  `id` int NOT NULL,
-  `user_id` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `selector` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `hashed_token` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` int(11) NOT NULL,
+  `user_id` varchar(9) NOT NULL,
+  `selector` varchar(20) NOT NULL,
+  `hashed_token` varchar(100) NOT NULL,
   `requested_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)',
   `expires_at` datetime NOT NULL COMMENT '(DC2Type:datetime_immutable)'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -210,8 +210,8 @@ CREATE TABLE `reset_password_request` (
 --
 
 CREATE TABLE `specialization` (
-  `id` int NOT NULL,
-  `description` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
+  `id` int(11) NOT NULL,
+  `description` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -239,19 +239,19 @@ INSERT INTO `specialization` (`id`, `description`) VALUES
 --
 
 CREATE TABLE `user` (
-  `id` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `name` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `surname` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `id` varchar(9) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `surname` varchar(255) NOT NULL,
   `birth_date` date DEFAULT NULL,
-  `address` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `city` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `province` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
-  `zip` int DEFAULT NULL,
-  `email` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `roles` json NOT NULL,
-  `password` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `genre` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
-  `phone` int DEFAULT NULL
+  `address` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `zip` int(11) DEFAULT NULL,
+  `email` varchar(255) NOT NULL,
+  `roles` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`roles`)),
+  `password` varchar(255) NOT NULL,
+  `genre` varchar(255) NOT NULL,
+  `phone` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
@@ -272,7 +272,7 @@ ALTER TABLE `appointment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_FE38F844FA846217` (`specialization_id`),
   ADD KEY `IDX_FE38F8446B899279` (`patient_id`),
-  ADD KEY `IDX_FE38F84487F4FB17` (`therapist_id`);
+  ADD KEY `IDX_FE38F84487F4FB17` (`doctor_id`);
 
 --
 -- Indices de la tabla `category`
@@ -281,9 +281,9 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `therapist_profile`
+-- Indices de la tabla `doctor_profile`
 --
-ALTER TABLE `therapist_profile`
+ALTER TABLE `doctor_profile`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_12FAC9A2A76ED395` (`user_id`);
 
@@ -313,7 +313,7 @@ ALTER TABLE `invoice_product`
 ALTER TABLE `medical_report`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_AF71C02B6B899279` (`patient_id`),
-  ADD KEY `IDX_AF71C02B87F4FB17` (`therapist_id`);
+  ADD KEY `IDX_AF71C02B87F4FB17` (`doctor_id`);
 
 --
 -- Indices de la tabla `messenger_messages`
@@ -366,61 +366,61 @@ ALTER TABLE `user`
 -- AUTO_INCREMENT de la tabla `appointment`
 --
 ALTER TABLE `appointment`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `therapist_profile`
+-- AUTO_INCREMENT de la tabla `doctor_profile`
 --
-ALTER TABLE `therapist_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+ALTER TABLE `doctor_profile`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `invoice`
 --
 ALTER TABLE `invoice`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `medical_report`
 --
 ALTER TABLE `medical_report`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `messenger_messages`
 --
 ALTER TABLE `messenger_messages`
-  MODIFY `id` bigint NOT NULL AUTO_INCREMENT;
+  MODIFY `id` bigint(20) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `patient_profile`
 --
 ALTER TABLE `patient_profile`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `product`
 --
 ALTER TABLE `product`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT de la tabla `reset_password_request`
 --
 ALTER TABLE `reset_password_request`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT de la tabla `specialization`
 --
 ALTER TABLE `specialization`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- Restricciones para tablas volcadas
@@ -431,13 +431,13 @@ ALTER TABLE `specialization`
 --
 ALTER TABLE `appointment`
   ADD CONSTRAINT `FK_FE38F8446B899279` FOREIGN KEY (`patient_id`) REFERENCES `patient_profile` (`id`),
-  ADD CONSTRAINT `FK_FE38F84487F4FB17` FOREIGN KEY (`therapist_id`) REFERENCES `therapist_profile` (`id`),
+  ADD CONSTRAINT `FK_FE38F84487F4FB17` FOREIGN KEY (`doctor_id`) REFERENCES `doctor_profile` (`id`),
   ADD CONSTRAINT `FK_FE38F844FA846217` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`);
 
 --
--- Filtros para la tabla `therapist_profile`
+-- Filtros para la tabla `doctor_profile`
 --
-ALTER TABLE `therapist_profile`
+ALTER TABLE `doctor_profile`
   ADD CONSTRAINT `FK_12FAC9A2A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
@@ -452,7 +452,7 @@ ALTER TABLE `invoice_product`
 --
 ALTER TABLE `medical_report`
   ADD CONSTRAINT `FK_AF71C02B6B899279` FOREIGN KEY (`patient_id`) REFERENCES `patient_profile` (`id`),
-  ADD CONSTRAINT `FK_AF71C02B87F4FB17` FOREIGN KEY (`therapist_id`) REFERENCES `therapist_profile` (`id`);
+  ADD CONSTRAINT `FK_AF71C02B87F4FB17` FOREIGN KEY (`doctor_id`) REFERENCES `doctor_profile` (`id`);
 
 --
 -- Filtros para la tabla `patient_profile`
