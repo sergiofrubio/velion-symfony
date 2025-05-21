@@ -6,7 +6,7 @@
       :style="sidebarStyle"
     >
       <div class="p-4">
-        <h5 class="fw-bold text-primary mb-4">Mi Panel</h5>
+        <img src="/Aquiles-logo.png" alt="Logo" class="img-fluid mb-4" style="max-width: 150px;" />
         <ul class="nav flex-column">
           <li class="nav-item mb-2" v-for="item in menu" :key="item.text">
             <router-link :to="item.route" class="nav-link text-dark d-flex align-items-center gap-2"

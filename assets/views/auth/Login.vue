@@ -1,8 +1,12 @@
 <template>
 	<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
 		<div class="card shadow-sm p-4 p-md-5 rounded-4" style="max-width: 400px; width: 100%;">
-			<h2 class="mb-4 text-center text-primary fw-bold text-primary mb-0">Iniciar sesión</h2>
+			<div class="text-center mb-4">
+                <img src="/Aquiles-logo.png" alt="Logo" class="img-fluid" style="max-width: 150px;" />
+            </div>
 
+<!-- 			<h2 class="mb-4 text-center text-primary fw-bold text-primary mb-0">Iniciar sesión</h2>
+ -->
 			<form @submit.prevent="handleLogin">
 				<div class="mb-3">
 					<label for="email" class="form-label fw-medium">Correo electrónico</label>
