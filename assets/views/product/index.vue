@@ -1,14 +1,14 @@
 <template>
   <div>
-    <div class="row align-items-center mb-3">
+    <div class="row align-Products-center mb-3">
       <div class="col-12 col-md-auto mb-2 mb-md-0">
-        <h3 class="fw-bold text-primary mb-0">Products</h3>
+        <h3 class="fw-bold text-primary mb-0">Productos</h3>
       </div>
       <div class="col-12 col-md d-flex justify-content-md-end gap-2">
         <input type="text" v-model="filter" placeholder="Filtrar products..." class="form-control"
           style="max-width: 220px" />
         <router-link to="/products/new" class="btn btn-primary flex-shrink-0">
-          <i class="bi bi-plus-circle"></i> Nuevo Product
+          <i class="bi bi-plus-circle"></i> Nuevo Producto
         </router-link>
       </div>
     </div>
@@ -19,15 +19,15 @@
           <tr>
             <th>#</th>
             <th>Descripción</th>
-            <th>Precio</th>
+            <th>price</th>
             <th >Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(product, index) in paginatedItems" :key="product.id">
+          <tr v-for="(product, index) in paginatedProducts" :key="product.id">
             <td>{{ product.id }}</td>
-            <td>{{ product.descripcion }}</td>
-            <td>{{ product.precio }}</td>
+            <td>{{ product.description }}</td>
+            <td>{{ product.price }}</td>
             <td>
               <router-link :to="`/produts/${product.id}/edit`" class="btn btn-sm btn-outline-primary me-2">
                 <i class="bi bi-pencil"></i>
@@ -37,7 +37,7 @@
               </button>
             </td>
           </tr>
-          <tr v-if="filteredItems.length === 0">
+          <tr v-if="filteredProducts.length === 0">
             <td colspan="6" class="text-center text-muted">Sin resultados</td>
           </tr>
         </tbody>
@@ -69,35 +69,35 @@ export default {
     return {
       filter: "",
       currentPage: 1,
-      itemsPerPage: 5,
-      items: [
-        { id: 1, descripcion: "Juan Pérez", precio: 5},
-        { id: 2, descripcion: "Ana García", precio: 13},
+      productsPerPage: 5,
+      products: [
+        { id: 1, description: "Juan Pérez", price: 5},
+        { id: 2, description: "Ana García", price: 13},
       ]
     };
   },
   computed: {
-    filteredItems() {
-      if (!this.filter) return this.items;
+    filteredProducts() {
+      if (!this.filter) return this.products;
 
       const f = this.filter.toLowerCase();
-      return this.items.filter(
+      return this.products.filter(
         u =>
-          u.descripcion.toLowerCase().includes(f) ||
-          u.precio.toString().toLowerCase().includes(f)
+          u.description.toLowerCase().includes(f) ||
+          u.price.toString().toLowerCase().includes(f)
       );
     },
     totalPages() {
-      return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+      return Math.ceil(this.filteredProducts.length / this.productsPerPage);
     },
-    paginatedItems() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return this.filteredItems.slice(start, start + this.itemsPerPage);
+    paginatedProducts() {
+      const start = (this.currentPage - 1) * this.productsPerPage;
+      return this.filteredProducts.slice(start, start + this.productsPerPage);
     }
   },
   methods: {
-    deletePatient(id) {
-      this.patients = this.patients.filter(p => p.id !== id);
+    deleteProduct(id) {
+      this.products = this.products.filter(p => p.id !== id);
     }
   },
   watch: {

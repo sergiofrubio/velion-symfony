@@ -58,10 +58,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private ?int $phone = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?PatientProfile $patientProfile = null;
+    private ?Patient $patient = null;
 
     #[ORM\OneToOne(mappedBy: 'user', cascade: ['persist', 'remove'])]
-    private ?DoctorProfile $doctorProfile = null;
+    private ?Therapist $therapist = null;
 
     // #[ORM\Column]
     // private bool $isVerified = false;
@@ -249,36 +249,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     //     return $this;
     // }
 
-    public function getPatientProfile(): ?PatientProfile
+    public function getPatient(): ?Patient
     {
-        return $this->patientProfile;
+        return $this->patient;
     }
 
-    public function setPatientProfile(PatientProfile $patientProfile): static
+    public function setPatient(Patient $patient): static
     {
         // set the owning side of the relation if necessary
-        if ($patientProfile->getUser() !== $this) {
-            $patientProfile->setUser($this);
+        if ($patient->getUser() !== $this) {
+            $patient->setUser($this);
         }
 
-        $this->patientProfile = $patientProfile;
+        $this->patient = $patient;
 
         return $this;
     }
 
-    public function getDoctorProfile(): ?DoctorProfile
+    public function getTherapist(): ?Therapist
     {
-        return $this->doctorProfile;
+        return $this->therapist;
     }
 
-    public function setDoctorProfile(DoctorProfile $doctorProfile): static
+    public function setTherapist(Therapist $therapist): static
     {
         // set the owning side of the relation if necessary
-        if ($doctorProfile->getUser() !== $this) {
-            $doctorProfile->setUser($this);
+        if ($therapist->getUser() !== $this) {
+            $therapist->setUser($this);
         }
 
-        $this->doctorProfile = $doctorProfile;
+        $this->therapist = $therapist;
 
         return $this;
     }

@@ -1,13 +1,13 @@
 <template>
 	<div>
-		<div class="row align-items-center mb-3">
+		<div class="row align-invoices-center mb-3">
 			<div class="col-12 col-md-auto mb-2 mb-md-0">
 				<h3 class="fw-bold text-primary mb-0">Facturas</h3>
 			</div>
 			<div class="col-12 col-md d-flex justify-content-md-end gap-2">
 				<input type="text" v-model="filter" placeholder="Filtrar facturas..." class="form-control"
 					style="max-width: 220px" />
-				<router-link to="/therapists/new" class="btn btn-primary flex-shrink-0">
+				<router-link to="/invoices/new" class="btn btn-primary flex-shrink-0">
 					<i class="bi bi-plus-circle"></i> Nueva Factura
 				</router-link>
 			</div>
@@ -26,14 +26,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(factura, index) in paginatedItems" :key="factura.id">
-						<td>{{ factura.id }}</td>
-						<td>{{ factura.cliente }}</td>
-						<td>{{ factura.fecha }}</td>
-						<td>{{ factura.total }} €</td>
+					<tr v-for="(invoice, index) in paginatedInvoices" :key="invoice.id">
+						<td>{{ invoice.id }}</td>
+						<td>{{ invoice.patient }}</td>
+						<td>{{ invoice.date }}</td>
+						<td>{{ invoice.total }} €</td>
 						<td>
-							<span class="badge" :class="factura.estado === 'Pagada' ? 'bg-success' : 'bg-danger'">
-								{{ factura.estado }}
+							<span class="badge" :class="invoice.status === 'Pagada' ? 'bg-success' : 'bg-danger'">
+								{{ invoice.status }}
 							</span>
 						</td>
 						<td >
@@ -43,7 +43,7 @@
 							</button>
 						</td>
 					</tr>
-					<tr v-if="filteredItems.length === 0">
+					<tr v-if="filteredInvoices.length === 0">
 						<td colspan="6" class="text-center text-muted">Sin resultados</td>
 					</tr>
 				</tbody>
@@ -69,35 +69,35 @@
 
 <script>
 export default {
-	name: "Facturas",
+	name: "invoices",
 	data() {
 		return {
 			filter: "",
 			currentPage: 1,
-			itemsPerPage: 5,
-			facturas: [
-				{ id: 1, cliente: "Empresa A", fecha: "2025-05-01", total: 120.50, estado: "Pagada" },
-				{ id: 2, cliente: "Juan Pérez", fecha: "2025-05-02", total: 89.99, estado: "Pendiente" },
-				{ id: 3, cliente: "Ana García", fecha: "2025-05-03", total: 150.00, estado: "Pagada" },
-				{ id: 4, cliente: "Pedro Gómez", fecha: "2025-05-04", total: 200.00, estado: "Pendiente" },
-				{ id: 5, cliente: "Lucía Sánchez", fecha: "2025-05-05", total: 99.00, estado: "Pagada" },
-				{ id: 6, cliente: "Mario Díaz", fecha: "2025-05-06", total: 145.70, estado: "Pagada" }
+			invoicesPerPage: 5,
+			invoices: [
+				{ id: 1, patient: "Empresa A", date: "2025-05-01", total: 120.50, status: "Pagada" },
+				{ id: 2, patient: "Juan Pérez", date: "2025-05-02", total: 89.99, status: "Pendiente" },
+				{ id: 3, patient: "Ana García", date: "2025-05-03", total: 150.00, status: "Pagada" },
+				{ id: 4, patient: "Pedro Gómez", date: "2025-05-04", total: 200.00, status: "Pendiente" },
+				{ id: 5, patient: "Lucía Sánchez", date: "2025-05-05", total: 99.00, status: "Pagada" },
+				{ id: 6, patient: "Mario Díaz", date: "2025-05-06", total: 145.70, status: "Pagada" }
 			]
 		};
 	},
 	computed: {
-		filteredItems() {
+		filteredInvoices() {
 			const f = this.filter.toLowerCase();
-			return this.facturas.filter(factura =>
-				factura.cliente.toLowerCase().includes(f) || factura.estado.toLowerCase().includes(f)
+			return this.invoices.filter(invoice =>
+				invoice.patient.toLowerCase().includes(f) || invoice.status.toLowerCase().includes(f)
 			);
 		},
 		totalPages() {
-			return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+			return Math.ceil(this.filteredInvoices.length / this.invoicesPerPage);
 		},
-		paginatedItems() {
-			const start = (this.currentPage - 1) * this.itemsPerPage;
-			return this.filteredItems.slice(start, start + this.itemsPerPage);
+		paginatedInvoices() {
+			const start = (this.currentPage - 1) * this.invoicesPerPage;
+			return this.filteredInvoices.slice(start, start + this.invoicesPerPage);
 		}
 	},
 	watch: {

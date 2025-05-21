@@ -2,37 +2,36 @@
 
 namespace App\Entity;
 
-use App\Repository\PatientProfileRepository;
+use App\Repository\TherapistRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
-use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-#[ORM\Entity(repositoryClass: PatientProfileRepository::class)]
-class PatientProfile
+#[ORM\Entity(repositoryClass: TherapistRepository::class)]
+class Therapist
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(type: Types::TEXT, nullable: true)]
-    private ?string $allergies = null;
+    #[ORM\Column(length: 255)]
+    private ?string $license_number = null;
 
-    #[ORM\OneToOne(inversedBy: 'patientProfile', cascade: ['persist', 'remove'])]
+    #[ORM\OneToOne(inversedBy: 'therapist', cascade: ['persist', 'remove'])]
     #[ORM\JoinColumn(nullable: false)]
     private ?User $user = null;
 
     /**
      * @var Collection<int, Appointment>
      */
-    #[ORM\OneToMany(targetEntity: Appointment::class, mappedBy: 'patient')]
+    #[ORM\OneToMany(targetEntity: Appointment::class, mappedBy: 'therapist')]
     private Collection $appointments;
 
     /**
      * @var Collection<int, MedicalReport>
      */
-    #[ORM\OneToMany(targetEntity: MedicalReport::class, mappedBy: 'patient')]
+    #[ORM\OneToMany(targetEntity: MedicalReport::class, mappedBy: 'therapist')]
     private Collection $medicalReports;
 
     public function __construct()
@@ -46,14 +45,14 @@ class PatientProfile
         return $this->id;
     }
 
-    public function getAllergies(): ?string
+    public function getLicenseNumber(): ?string
     {
-        return $this->allergies;
+        return $this->license_number;
     }
 
-    public function setAllergies(?string $allergies): static
+    public function setLicenseNumber(string $license_number): static
     {
-        $this->allergies = $allergies;
+        $this->license_number = $license_number;
 
         return $this;
     }
@@ -82,7 +81,7 @@ class PatientProfile
     {
         if (!$this->appointments->contains($appointment)) {
             $this->appointments->add($appointment);
-            $appointment->setPatient($this);
+            $appointment->settherapist($this);
         }
 
         return $this;
@@ -92,8 +91,8 @@ class PatientProfile
     {
         if ($this->appointments->removeElement($appointment)) {
             // set the owning side to null (unless already changed)
-            if ($appointment->getPatient() === $this) {
-                $appointment->setPatient(null);
+            if ($appointment->gettherapist() === $this) {
+                $appointment->settherapist(null);
             }
         }
 
@@ -112,7 +111,7 @@ class PatientProfile
     {
         if (!$this->medicalReports->contains($medicalReport)) {
             $this->medicalReports->add($medicalReport);
-            $medicalReport->setPatient($this);
+            $medicalReport->settherapist($this);
         }
 
         return $this;
@@ -122,8 +121,8 @@ class PatientProfile
     {
         if ($this->medicalReports->removeElement($medicalReport)) {
             // set the owning side to null (unless already changed)
-            if ($medicalReport->getPatient() === $this) {
-                $medicalReport->setPatient(null);
+            if ($medicalReport->gettherapist() === $this) {
+                $medicalReport->settherapist(null);
             }
         }
 

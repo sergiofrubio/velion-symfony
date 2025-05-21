@@ -6,14 +6,14 @@ import Dashboard from '../views/Dashboard.vue';
 import Start from '../views/Start.vue';
 import Patient from '../views/patient/index.vue';
 import PatientForm from '../views/patient/PatientForm.vue';
-import Doctor from '../views/doctor/index.vue';
-import DoctorForm from '../views/doctor/doctorForm.vue';
+import Therapist from '../views/therapist/index.vue';
+import TherapistForm from '../views/therapist/TherapistForm.vue';
 import Appointment from '../views/appointment/index.vue';
 import Invoice from '../views/invoice/index.vue';
 import InvoiceForm from '../views/invoice/InvoiceForm.vue';
 import Product from '../views/product/index.vue';
 import ProductForm from '../views/product/ProductForm.vue';
-import Config from '../views/Config.vue';
+import Config from '../views/settings/index.vue';
 import Error from '../views/404.vue';
 
 
@@ -26,9 +26,9 @@ const routes = [
   { path: '/patients/new', component: Dashboard, children: [{ path: '', component: PatientForm }], meta: { requiresAuth: false } },
   { path: '/patients/:id/edit', component: Dashboard, children: [{ path: '', component: PatientForm }], meta: { requiresAuth: false }, props: false },
 
-  { path: '/doctors', component: Dashboard, children: [{ path: '', component: Doctor }], meta: { requiresAuth: false } },
-  { path: '/doctors/new', component: Dashboard, children: [{ path: '', component: DoctorForm }], meta: { requiresAuth: false } },
-  { path: '/doctors/:id/edit', component: Dashboard, children: [{ path: '', component: DoctorForm }], meta: { requiresAuth: false }, props: false },
+  { path: '/therapists', component: Dashboard, children: [{ path: '', component: Therapist }], meta: { requiresAuth: false } },
+  { path: '/therapists/new', component: Dashboard, children: [{ path: '', component: TherapistForm }], meta: { requiresAuth: false } },
+  { path: '/therapists/:id/edit', component: Dashboard, children: [{ path: '', component: TherapistForm }], meta: { requiresAuth: false }, props: false },
 
 
   { path: '/appointments', component: Dashboard, children: [{ path: '', component: Appointment }], meta: { requiresAuth: false } },

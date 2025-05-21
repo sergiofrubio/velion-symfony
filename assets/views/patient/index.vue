@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row align-items-center mb-3">
+    <div class="row align-patients-center mb-3">
       <div class="col-12 col-md-auto mb-2 mb-md-0">
         <h3 class="fw-bold text-primary mb-0">Pacientes</h3>
       </div>
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="patient in filteredItems" :key="patient.id">
+          <tr v-for="patient in filteredPatients" :key="patient.id">
             <td>{{ patient.name }} {{ patient.surname }}</td>
             <td>{{ patient.email }}</td>
             <td>{{ patient.phone }}</td>
@@ -39,7 +39,7 @@
               </button>
             </td>
           </tr>
-          <tr v-if="filteredItems.length === 0">
+          <tr v-if="filteredPatients.length === 0">
             <td colspan="5" class="text-center text-muted">No hay pacientes registrados.</td>
           </tr>
         </tbody>
@@ -70,7 +70,7 @@ export default {
     return {
       filter: "",
       currentPage: 1,
-      itemsPerPage: 5,
+      patientsPerPage: 5,
       patients: [
         { id: 1, name: "Ana", surname: "García", email: "ana@example.com", phone: "612345678", insurance: "Sanitas" },
         { id: 2, name: "Luis", surname: "Pérez", email: "luis@example.com", phone: "698765432", insurance: "Adeslas" }
@@ -78,7 +78,7 @@ export default {
     };
   },
   computed: {
-    filteredItems() {
+    filteredPatients() {
       const f = this.filter.toLowerCase();
       return this.patients.filter(p =>
         p.name.toLowerCase().includes(f) ||
@@ -89,11 +89,11 @@ export default {
       );
     },
     totalPages() {
-      return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+      return Math.ceil(this.filteredPatients.length / this.patientsPerPage);
     },
-    paginatedItems() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return this.filteredItems.slice(start, start + this.itemsPerPage);
+    paginatedPatients() {
+      const start = (this.currentPage - 1) * this.patientsPerPage;
+      return this.filteredPatients.slice(start, start + this.patientsPerPage);
     }
   },
   methods: {

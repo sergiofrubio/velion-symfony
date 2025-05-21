@@ -3,8 +3,12 @@
     <h3 class="fw-bold text-primary mb-4">{{ isEdit ? "Editar Paciente" : "Nuevo Paciente" }}</h3>
     <form @submit.prevent="handleSubmit" class="row g-3">
       <div class="col-md-6">
-        <label for="name" class="form-label">Nombre Completo</label>
+        <label for="name" class="form-label">Nombre</label>
         <input v-model="form.name" id="name" type="text" class="form-control" required />
+      </div>
+      <div class="col-md-6">
+        <label for="name" class="form-label">Apellidos</label>
+        <input v-model="form.surname" id="name" type="text" class="form-control" required />
       </div>
       <div class="col-md-6">
         <label for="id" class="form-label">DNI</label>

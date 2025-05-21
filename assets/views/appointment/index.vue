@@ -1,14 +1,14 @@
 <template>
 	<div>
-		<div class="row align-items-center mb-3">
+		<div class="row align-appointments-center mb-3">
 			<div class="col-12 col-md-auto mb-2 mb-md-0">
 				<h3 class="fw-bold text-primary mb-0">Citas</h3>
 			</div>
 			<div class="col-12 col-md d-flex justify-content-md-end gap-2">
-				<input type="text" v-model="filter" placeholder="Filtrar Citas..." class="form-control"
+				<input type="text" v-model="filter" placeholder="Filtrar citas..." class="form-control"
 					style="max-width: 220px" />
 				<router-link to="/therapists/new" class="btn btn-primary flex-shrink-0">
-					<i class="bi bi-plus-circle"></i> Nueva Cita
+					<i class="bi bi-plus-circle"></i> Nueva cita
 				</router-link>
 			</div>
 		</div>
@@ -26,14 +26,14 @@
 					</tr>
 				</thead>
 				<tbody>
-					<tr v-for="(cita, index) in paginatedItems" :key="cita.id">
-						<td>{{ cita.id }}</td>
-						<td>{{ cita.paciente }}</td>
-						<td>{{ cita.fecha }}</td>
-						<td>{{ cita.hora }}</td>
+					<tr v-for="(appointment, index) in paginatedAppointments" :key="appointment.id">
+						<td>{{ appointment.id }}</td>
+						<td>{{ appointment.patient }}</td>
+						<td>{{ appointment.date }}</td>
+						<td>{{ appointment.time }}</td>
 						<td>
-							<span class="badge" :class="cita.estado === 'Confirmada' ? 'bg-success' : 'bg-warning'">
-								{{ cita.estado }}
+							<span class="badge" :class="appointment.status === 'Confirmada' ? 'bg-success' : 'bg-warning'">
+								{{ appointment.status }}
 							</span>
 						</td>
 						<td >
@@ -43,7 +43,7 @@
 							</button>
 						</td>
 					</tr>
-					<tr v-if="filteredItems.length === 0">
+					<tr v-if="filteredAppointments.length === 0">
 						<td colspan="6" class="text-center text-muted">Sin resultados</td>
 					</tr>
 				</tbody>
@@ -74,30 +74,30 @@ export default {
 		return {
 			filter: "",
 			currentPage: 1,
-			itemsPerPage: 5,
-			items: [
-				{ id: 1, paciente: "Juan Pérez", fecha: "2025-05-10", hora: "10:00", estado: "Confirmada" },
-				{ id: 2, paciente: "Ana García", fecha: "2025-05-11", hora: "11:30", estado: "Pendiente" },
-				{ id: 3, paciente: "Carlos Ruiz", fecha: "2025-05-12", hora: "09:15", estado: "Confirmada" },
-				{ id: 4, paciente: "Laura López", fecha: "2025-05-13", hora: "14:00", estado: "Pendiente" },
-				{ id: 5, paciente: "Pedro Gómez", fecha: "2025-05-14", hora: "13:30", estado: "Confirmada" },
-				{ id: 6, paciente: "Sofía Torres", fecha: "2025-05-15", hora: "16:00", estado: "Confirmada" }
+			appointmentsPerPage: 5,
+			appointments: [
+				{ id: 1, patient: "Juan Pérez", date: "2025-05-10", time: "10:00", status: "Confirmada" },
+				{ id: 2, patient: "Ana García", date: "2025-05-11", time: "11:30", status: "Pendiente" },
+				{ id: 3, patient: "Carlos Ruiz", date: "2025-05-12", time: "09:15", status: "Confirmada" },
+				{ id: 4, patient: "Laura López", date: "2025-05-13", time: "14:00", status: "Pendiente" },
+				{ id: 5, patient: "Pedro Gómez", date: "2025-05-14", time: "13:30", status: "Confirmada" },
+				{ id: 6, patient: "Sofía Torres", date: "2025-05-15", time: "16:00", status: "Confirmada" }
 			]
 		};
 	},
 	computed: {
-		filteredItems() {
+		filteredAppointments() {
 			const f = this.filter.toLowerCase();
-			return this.items.filter(c =>
-				c.paciente.toLowerCase().includes(f) || c.fecha.includes(f)
+			return this.appointments.filter(c =>
+				c.patient.toLowerCase().includes(f) || c.date.includes(f)
 			);
 		},
 		totalPages() {
-			return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+			return Math.ceil(this.filteredAppointments.length / this.appointmentsPerPage);
 		},
-		paginatedItems() {
-			const start = (this.currentPage - 1) * this.itemsPerPage;
-			return this.filteredItems.slice(start, start + this.itemsPerPage);
+		paginatedAppointments() {
+			const start = (this.currentPage - 1) * this.appointmentsPerPage;
+			return this.filteredAppointments.slice(start, start + this.appointmentsPerPage);
 		}
 	},
 	watch: {

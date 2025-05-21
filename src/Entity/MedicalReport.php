@@ -24,11 +24,11 @@ class MedicalReport
 
     #[ORM\ManyToOne(inversedBy: 'medicalReports')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?PatientProfile $patient = null;
+    private ?Patient $patient = null;
 
     #[ORM\ManyToOne(inversedBy: 'medicalReports')]
     #[ORM\JoinColumn(nullable: false)]
-    private ?DoctorProfile $doctor = null;
+    private ?Therapist $therapist = null;
 
     public function getId(): ?int
     {
@@ -71,26 +71,26 @@ class MedicalReport
         return $this;
     }
 
-    public function getPatient(): ?PatientProfile
+    public function getPatient(): ?Patient
     {
         return $this->patient;
     }
 
-    public function setPatient(?PatientProfile $patient): static
+    public function setPatient(?Patient $patient): static
     {
         $this->patient = $patient;
 
         return $this;
     }
 
-    public function getDoctor(): ?DoctorProfile
+    public function gettherapist(): ?Therapist
     {
-        return $this->doctor;
+        return $this->therapist;
     }
 
-    public function setDoctor(?DoctorProfile $doctor): static
+    public function settherapist(?Therapist $therapist): static
     {
-        $this->doctor = $doctor;
+        $this->therapist = $therapist;
 
         return $this;
     }

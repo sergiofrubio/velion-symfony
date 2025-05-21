@@ -31,7 +31,7 @@ CREATE TABLE `appointment` (
   `id` int NOT NULL,
   `specialization_id` int NOT NULL,
   `patient_id` int NOT NULL,
-  `doctor_id` int NOT NULL,
+  `therapist_id` int NOT NULL,
   `date` date NOT NULL,
   `time` time NOT NULL,
   `duration` int NOT NULL,
@@ -66,10 +66,10 @@ INSERT INTO `category` (`id`, `name`, `description`) VALUES
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `doctor_profile`
+-- Estructura de tabla para la tabla `therapist_profile`
 --
 
-CREATE TABLE `doctor_profile` (
+CREATE TABLE `therapist_profile` (
   `id` int NOT NULL,
   `user_id` varchar(9) COLLATE utf8mb4_unicode_ci NOT NULL,
   `license_number` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -119,7 +119,7 @@ CREATE TABLE `invoice_product` (
 CREATE TABLE `medical_report` (
   `id` int NOT NULL,
   `patient_id` int NOT NULL,
-  `doctor_id` int NOT NULL,
+  `therapist_id` int NOT NULL,
   `diagnosis` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `treatment` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `notes` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL
@@ -272,7 +272,7 @@ ALTER TABLE `appointment`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_FE38F844FA846217` (`specialization_id`),
   ADD KEY `IDX_FE38F8446B899279` (`patient_id`),
-  ADD KEY `IDX_FE38F84487F4FB17` (`doctor_id`);
+  ADD KEY `IDX_FE38F84487F4FB17` (`therapist_id`);
 
 --
 -- Indices de la tabla `category`
@@ -281,9 +281,9 @@ ALTER TABLE `category`
   ADD PRIMARY KEY (`id`);
 
 --
--- Indices de la tabla `doctor_profile`
+-- Indices de la tabla `therapist_profile`
 --
-ALTER TABLE `doctor_profile`
+ALTER TABLE `therapist_profile`
   ADD PRIMARY KEY (`id`),
   ADD UNIQUE KEY `UNIQ_12FAC9A2A76ED395` (`user_id`);
 
@@ -313,7 +313,7 @@ ALTER TABLE `invoice_product`
 ALTER TABLE `medical_report`
   ADD PRIMARY KEY (`id`),
   ADD KEY `IDX_AF71C02B6B899279` (`patient_id`),
-  ADD KEY `IDX_AF71C02B87F4FB17` (`doctor_id`);
+  ADD KEY `IDX_AF71C02B87F4FB17` (`therapist_id`);
 
 --
 -- Indices de la tabla `messenger_messages`
@@ -375,9 +375,9 @@ ALTER TABLE `category`
   MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
--- AUTO_INCREMENT de la tabla `doctor_profile`
+-- AUTO_INCREMENT de la tabla `therapist_profile`
 --
-ALTER TABLE `doctor_profile`
+ALTER TABLE `therapist_profile`
   MODIFY `id` int NOT NULL AUTO_INCREMENT;
 
 --
@@ -431,13 +431,13 @@ ALTER TABLE `specialization`
 --
 ALTER TABLE `appointment`
   ADD CONSTRAINT `FK_FE38F8446B899279` FOREIGN KEY (`patient_id`) REFERENCES `patient_profile` (`id`),
-  ADD CONSTRAINT `FK_FE38F84487F4FB17` FOREIGN KEY (`doctor_id`) REFERENCES `doctor_profile` (`id`),
+  ADD CONSTRAINT `FK_FE38F84487F4FB17` FOREIGN KEY (`therapist_id`) REFERENCES `therapist_profile` (`id`),
   ADD CONSTRAINT `FK_FE38F844FA846217` FOREIGN KEY (`specialization_id`) REFERENCES `specialization` (`id`);
 
 --
--- Filtros para la tabla `doctor_profile`
+-- Filtros para la tabla `therapist_profile`
 --
-ALTER TABLE `doctor_profile`
+ALTER TABLE `therapist_profile`
   ADD CONSTRAINT `FK_12FAC9A2A76ED395` FOREIGN KEY (`user_id`) REFERENCES `user` (`id`);
 
 --
@@ -452,7 +452,7 @@ ALTER TABLE `invoice_product`
 --
 ALTER TABLE `medical_report`
   ADD CONSTRAINT `FK_AF71C02B6B899279` FOREIGN KEY (`patient_id`) REFERENCES `patient_profile` (`id`),
-  ADD CONSTRAINT `FK_AF71C02B87F4FB17` FOREIGN KEY (`doctor_id`) REFERENCES `doctor_profile` (`id`);
+  ADD CONSTRAINT `FK_AF71C02B87F4FB17` FOREIGN KEY (`therapist_id`) REFERENCES `therapist_profile` (`id`);
 
 --
 -- Filtros para la tabla `patient_profile`

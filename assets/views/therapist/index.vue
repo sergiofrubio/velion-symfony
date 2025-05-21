@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="row align-items-center mb-3">
+    <div class="row align-therapists-center mb-3">
       <div class="col-12 col-md-auto mb-2 mb-md-0">
         <h3 class="fw-bold text-primary mb-0">Terapeutas</h3>
       </div>
@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr v-for="therapist in filteredItems" :key="therapist.id">
+          <tr v-for="therapist in filteredTherapists" :key="therapist.id">
             <td>{{ therapist.name }} {{ therapist.surname }}</td>
             <td>{{ therapist.email }}</td>
             <td>{{ therapist.specialty }}</td>
@@ -39,7 +39,7 @@
               </button>
             </td>
           </tr>
-          <tr v-if="filteredItems.length === 0">
+          <tr v-if="filteredTherapists.length === 0">
             <td colspan="5" class="text-center text-muted">No hay terapeutas registrados.</td>
           </tr>
         </tbody>
@@ -70,7 +70,7 @@ export default {
     return {
       filter: "",
       currentPage: 1,
-      itemsPerPage: 5,
+      therapistsPerPage: 5,
       therapists: [
         { id: 1, name: "Elena", surname: "López", email: "elena@example.com", specialty: "Psicología", phone: "600111222" },
         { id: 2, name: "Carlos", surname: "Ruiz", email: "carlos@example.com", specialty: "Fisioterapia", phone: "699999999" }
@@ -78,7 +78,7 @@ export default {
     };
   },
   computed: {
-    filteredItems() {
+    filteredTherapists() {
       const f = this.filter.toLowerCase();
       return this.therapists.filter(t =>
         t.name.toLowerCase().includes(f) ||
@@ -89,11 +89,11 @@ export default {
       );
     },
     totalPages() {
-      return Math.ceil(this.filteredItems.length / this.itemsPerPage);
+      return Math.ceil(this.filteredTherapists.length / this.therapistsPerPage);
     },
-    paginatedItems() {
-      const start = (this.currentPage - 1) * this.itemsPerPage;
-      return this.filteredItems.slice(start, start + this.itemsPerPage);
+    paginatedTherapists() {
+      const start = (this.currentPage - 1) * this.therapistsPerPage;
+      return this.filteredTherapists.slice(start, start + this.therapistsPerPage);
     }
 
   },
