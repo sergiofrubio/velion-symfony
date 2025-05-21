@@ -15,8 +15,8 @@ class Product
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 255)]
-    private ?string $name = null;
+   /*  #[ORM\Column(length: 255)]
+    private ?string $name = null; */
 
     #[ORM\Column(length: 255)]
     private ?string $description = null;
@@ -24,8 +24,8 @@ class Product
     #[ORM\Column]
     private ?int $price = null;
 
-    #[ORM\ManyToOne(inversedBy: 'products')]
-    private ?Category $category = null;
+    /* #[ORM\ManyToOne(inversedBy: 'products')]
+    private ?Category $category = null; */
 
     /**
      * @var Collection<int, Invoice>
@@ -43,7 +43,7 @@ class Product
         return $this->id;
     }
 
-    public function getName(): ?string
+   /*  public function getName(): ?string
     {
         return $this->name;
     }
@@ -53,7 +53,7 @@ class Product
         $this->name = $name;
 
         return $this;
-    }
+    } */
 
     public function getDescription(): ?string
     {
@@ -79,7 +79,7 @@ class Product
         return $this;
     }
 
-    public function getCategory(): ?Category
+  /*   public function getCategory(): ?Category
     {
         return $this->category;
     }
@@ -89,7 +89,7 @@ class Product
         $this->category = $category;
 
         return $this;
-    }
+    } */
 
     /**
      * @return Collection<int, Invoice>

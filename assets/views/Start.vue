@@ -73,24 +73,24 @@
         </div>
       </div>
 
-      <!-- Estadísticas Adicionales (con scroll vertical si no caben) -->
+      <!-- Estadísticas Adicionales en cuadrícula -->
       <div class="col-12 col-lg-4">
-        <div class="stats-container">
-          <div class="card shadow-sm rounded-4 mb-3">
+        <div class="stats-grid">
+          <div class="card shadow-sm rounded-4">
             <div class="card-body text-center">
               <i class="bi bi-calendar-check fs-2 text-success mb-2"></i>
               <h6>Citas Pendientes</h6>
               <p class="display-6">{{ stats.pendingAppointments }}</p>
             </div>
           </div>
-          <div class="card shadow-sm rounded-4 mb-3">
+          <div class="card shadow-sm rounded-4">
             <div class="card-body text-center">
               <i class="bi bi-x-circle fs-2 text-danger mb-2"></i>
               <h6>Citas Canceladas</h6>
               <p class="display-6">{{ stats.canceledAppointments }}</p>
             </div>
           </div>
-          <div class="card shadow-sm rounded-4 mb-3">
+          <div class="card shadow-sm rounded-4">
             <div class="card-body text-center">
               <i class="bi bi-people fs-2 text-primary mb-2"></i>
               <h6>Pacientes Nuevos</h6>
@@ -143,9 +143,23 @@ export default {
 
 <style scoped>
 .card {
-  margin-bottom: 2rem;
+  margin-bottom: 1rem; /* reduce el espacio inferior */
 }
 .table thead th {
   background: #f0f4ff;
+}
+/* Contenedor de estadísticas en cuadrícula */
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); /* Ajusta automáticamente las columnas */
+  gap: 1rem; /* Espaciado entre tarjetas */
+}
+/* Ajusta el padding interno de las tarjetas de estadísticas */
+.stats-grid .card-body {
+  padding: 0.5rem 0.75rem;
+}
+/* Reducir el tamaño de fuente para que los números no sean tan grandes */
+.display-6 {
+  font-size: 1.5rem;
 }
 </style>

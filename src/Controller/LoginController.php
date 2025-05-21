@@ -12,9 +12,10 @@ use App\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 
+#[Route('/api/login')]
 final class LoginController extends AbstractController
 {
-    #[Route('/api/login', name: 'app_login', methods: ['POST'])]
+    #[Route('/', name: 'app_login', methods: ['POST'])]
     public function login(
         Request $request,
         EntityManagerInterface $em,

@@ -83,7 +83,7 @@ export default {
       isSidebarVisible: false,
       menu: [
         { text: "Inicio", route: "/start", icon: "bi bi-house-door-fill" },
-        { text: "Terapeutas", route: "/therapists", icon: "bi bi-person-fill" },
+        { text: "Terapeutas", route: "/doctors", icon: "bi bi-person-fill" },
         { text: "Pacientes", route: "/patients", icon: "bi bi-person-heart" },
         { text: "Citas", route: "/appointments", icon: "bi bi-calendar-check-fill" },
         { text: "Productos", route: "/products", icon: "bi bi-bag" },

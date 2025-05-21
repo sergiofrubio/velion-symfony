@@ -2,13 +2,13 @@
   <div>
     <div class="row align-items-center mb-3">
       <div class="col-12 col-md-auto mb-2 mb-md-0">
-        <h3 class="fw-bold text-primary mb-0">Productos</h3>
+        <h3 class="fw-bold text-primary mb-0">Products</h3>
       </div>
       <div class="col-12 col-md d-flex justify-content-md-end gap-2">
-        <input type="text" v-model="filter" placeholder="Filtrar productos..." class="form-control"
+        <input type="text" v-model="filter" placeholder="Filtrar products..." class="form-control"
           style="max-width: 220px" />
-        <router-link to="/therapists/new" class="btn btn-primary flex-shrink-0">
-          <i class="bi bi-plus-circle"></i> Nuevo Producto
+        <router-link to="/products/new" class="btn btn-primary flex-shrink-0">
+          <i class="bi bi-plus-circle"></i> Nuevo Product
         </router-link>
       </div>
     </div>
@@ -18,28 +18,22 @@
         <thead>
           <tr>
             <th>#</th>
-            <th>Nombre</th>
-            <th>Email</th>
-            <th>Rol</th>
-            <th>Estado</th>
+            <th>Descripción</th>
+            <th>Precio</th>
             <th >Acciones</th>
           </tr>
         </thead>
         <tbody>
-          <tr v-for="(usuario, index) in paginatedItems" :key="usuario.id">
-            <td>{{ usuario.id }}</td>
-            <td>{{ usuario.nombre }}</td>
-            <td>{{ usuario.email }}</td>
-            <td>{{ usuario.rol }}</td>
+          <tr v-for="(product, index) in paginatedItems" :key="product.id">
+            <td>{{ product.id }}</td>
+            <td>{{ product.descripcion }}</td>
+            <td>{{ product.precio }}</td>
             <td>
-              <span class="badge" :class="usuario.activo ? 'bg-success' : 'bg-secondary'">
-                {{ usuario.activo ? 'Activo' : 'Inactivo' }}
-              </span>
-            </td>
-            <td >
-              <button class="btn btn-sm btn-outline-primary me-2 bi bi-pencil-square">
-              </button>
-              <button class="btn btn-sm btn-outline-danger bi bi-trash">
+              <router-link :to="`/produts/${product.id}/edit`" class="btn btn-sm btn-outline-primary me-2">
+                <i class="bi bi-pencil"></i>
+              </router-link>
+              <button class="btn btn-sm btn-outline-danger" @click="deleteProduct(product.id)">
+                <i class="bi bi-trash"></i>
               </button>
             </td>
           </tr>
@@ -70,21 +64,15 @@
 
 <script>
 export default {
-  name: "Producto",
+  name: "Product",
   data() {
     return {
       filter: "",
       currentPage: 1,
       itemsPerPage: 5,
       items: [
-        { id: 1, nombre: "Juan Pérez", email: "juan@example.com", rol: "Admin", activo: true },
-        { id: 2, nombre: "Ana García", email: "ana@example.com", rol: "Editor", activo: false },
-        { id: 3, nombre: "Carlos Ruiz", email: "carlos@example.com", rol: "Viewer", activo: true },
-        { id: 4, nombre: "Laura López", email: "laura@example.com", rol: "Admin", activo: true },
-        { id: 5, nombre: "Pedro Gómez", email: "pedro@example.com", rol: "Editor", activo: false },
-        { id: 6, nombre: "Lucía Sánchez", email: "lucia@example.com", rol: "Viewer", activo: true },
-        { id: 7, nombre: "Mario Díaz", email: "mario@example.com", rol: "Editor", activo: true },
-        { id: 8, nombre: "Sofía Torres", email: "sofia@example.com", rol: "Viewer", activo: false }
+        { id: 1, descripcion: "Juan Pérez", precio: 5},
+        { id: 2, descripcion: "Ana García", precio: 13},
       ]
     };
   },
@@ -95,8 +83,8 @@ export default {
       const f = this.filter.toLowerCase();
       return this.items.filter(
         u =>
-          u.nombre.toLowerCase().includes(f) ||
-          u.rol.toLowerCase().includes(f)
+          u.descripcion.toLowerCase().includes(f) ||
+          u.precio.toString().toLowerCase().includes(f)
       );
     },
     totalPages() {
@@ -105,6 +93,11 @@ export default {
     paginatedItems() {
       const start = (this.currentPage - 1) * this.itemsPerPage;
       return this.filteredItems.slice(start, start + this.itemsPerPage);
+    }
+  },
+  methods: {
+    deletePatient(id) {
+      this.patients = this.patients.filter(p => p.id !== id);
     }
   },
   watch: {
