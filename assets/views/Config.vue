@@ -1,6 +1,6 @@
 <template>
-    <div class="container py-5">
-      <h2 class="mb-4 text-primary fw-semibold">Configuración de cuenta</h2>
+    <div>
+      <h2 class="mb-4 text-primary fw-bold text-primary mb-0">Configuración de cuenta</h2>
   
       <!-- Sección de Datos Personales -->
       <section class="mb-5">
@@ -39,7 +39,7 @@
       </section>
   
       <!-- Botón de Guardar -->
-      <div class="text-end">
+      <div >
         <button class="btn btn-primary px-4" @click="handleUpdate">Guardar cambios</button>
       </div>
   

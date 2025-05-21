@@ -1,7 +1,10 @@
 <template>
   <div class="d-flex" id="layout">
     <!-- Sidebar -->
-    <aside class="sidebar bg-white border-end shadow-sm">
+    <aside 
+      class="sidebar bg-white border-end shadow-sm" 
+      :style="sidebarStyle"
+    >
       <div class="p-4">
         <h5 class="fw-bold text-primary mb-4">Mi Panel</h5>
         <ul class="nav flex-column">
@@ -18,9 +21,14 @@
 
     <!-- Main content -->
     <main class="flex-grow-1 p-4 bg-light min-vh-100">
-      <!-- Header -->
+      <!-- Header con botón de toggle para mobile -->
       <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="fw-semibold text-dark">{{ currentUserName }}</h2>
+        <div class="d-flex align-items-center">
+          <button class="btn d-md-none me-2" @click="toggleSidebar">
+            <i class="bi bi-list fs-4"></i>
+          </button>
+          <h2 class="fw-bold text-primary mb-0 text-dark">{{ currentUserName }}</h2>
+        </div>
 
         <div class="d-flex align-items-center gap-3">
           <!-- Botón de notificaciones -->
@@ -50,7 +58,6 @@
                   <i class="bi bi-trash"></i> Vaciar notificaciones
                 </button>
               </li>
-
             </ul>
           </div>
 
@@ -59,7 +66,7 @@
         </div>
       </div>
 
-      <!-- Page content slot -->
+      <!-- Contenido principal -->
       <div class="card p-4 shadow-sm rounded bg-white" style="height: 85vh;">
         <router-view />
       </div>
@@ -67,15 +74,17 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "Dashboard",
   data() {
     return {
+      width: window.innerWidth,
+      isSidebarVisible: false,
       menu: [
         { text: "Inicio", route: "/start", icon: "bi bi-house-door-fill" },
-        { text: "Usuarios", route: "/users", icon: "bi bi-people-fill" },
+        { text: "Terapeutas", route: "/therapists", icon: "bi bi-person-fill" },
+        { text: "Pacientes", route: "/patients", icon: "bi bi-person-heart" },
         { text: "Citas", route: "/appointments", icon: "bi bi-calendar-check-fill" },
         { text: "Productos", route: "/products", icon: "bi bi-bag" },
         { text: "Facturas", route: "/invoices", icon: "bi bi-receipt-cutoff" },
@@ -88,13 +97,48 @@ export default {
       ]
     };
   },
+  computed: {
+    isMobile() {
+      return this.width < 768;
+    },
+    sidebarStyle() {
+      if (this.isMobile) {
+        return {
+          width: '70%',
+          position: 'fixed',
+          zIndex: 1050,
+          height: '100vh',
+          transition: 'transform 0.3s ease',
+          transform: this.isSidebarVisible ? 'translateX(0)' : 'translateX(-100%)'
+        };
+      }
+      return {
+        width: '14%',
+        position: 'sticky',
+        top: '0',
+        height: '100vh'
+      };
+    },
+    currentUserName() {
+      return 'Bienvenid@, ' + localStorage.getItem('userName');
+    }
+  },
   methods: {
+    toggleSidebar() {
+      this.isSidebarVisible = !this.isSidebarVisible;
+    },
+    handleResize() {
+      this.width = window.innerWidth;
+      // Si la pantalla es grande, aseguramos que el sidebar se muestre
+      if (this.width >= 768) {
+        this.isSidebarVisible = true;
+      } else {
+        this.isSidebarVisible = false;
+      }
+    },
     logout() {
-      // Borrar el token y el usuario del almacenamiento
       localStorage.removeItem('token');
       localStorage.removeItem('user');
-
-      // Redirigir al login
       this.$router.push('/login');
     },
     markNotificationsAsRead() {
@@ -104,10 +148,12 @@ export default {
       this.notifications = [];
     }
   },
-  computed: {
-    currentUserName() {
-      return 'Bienvenid@, ' + localStorage.getItem('userName');
-    }
+  mounted() {
+    this.handleResize();
+    window.addEventListener('resize', this.handleResize);
+  },
+  beforeUnmount() {
+    window.removeEventListener('resize', this.handleResize);
   }
 };
 </script>
@@ -116,13 +162,6 @@ export default {
 #layout {
   height: 100vh;
   overflow: hidden;
-}
-
-.sidebar {
-  width: 14%;
-  position: sticky;
-  top: 0;
-  height: 100vh;
 }
 
 .nav-link.active {
@@ -139,9 +178,7 @@ export default {
 
 .nav-link:hover {
   background-color: #e7f1ff;
-  /* azul claro */
   color: #0d6efd;
-  /* azul bootstrap */
   text-decoration: none;
 }
 

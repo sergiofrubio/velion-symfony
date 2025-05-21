@@ -1,7 +1,7 @@
 <template>
 	<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
 		<div class="card shadow-sm p-4 p-md-5 rounded-4" style="max-width: 400px; width: 100%;">
-			<h2 class="mb-4 text-center text-primary fw-semibold">Iniciar sesión</h2>
+			<h2 class="mb-4 text-center text-primary fw-bold text-primary mb-0">Iniciar sesión</h2>
 
 			<form @submit.prevent="handleLogin">
 				<div class="mb-3">
@@ -35,7 +35,7 @@
 			<div class="modal-dialog">
 				<div class="modal-content rounded-4 shadow-sm">
 					<div class="modal-header">
-						<h5 class="modal-title text-primary fw-semibold" id="recuperarLabel">Recuperar contraseña</h5>
+						<h5 class="modal-title text-primary fw-bold text-primary mb-0" id="recuperarLabel">Recuperar contraseña</h5>
 						<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
 					</div>
 					<div class="modal-body">

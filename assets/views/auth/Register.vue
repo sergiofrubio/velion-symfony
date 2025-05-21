@@ -1,7 +1,7 @@
 <template>
   <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
     <div class="card shadow-sm p-4 p-md-5 rounded-4" style="max-width: 600px; width: 100%;">
-      <h2 class="mb-4 text-center text-primary fw-semibold">Crear cuenta</h2>
+      <h2 class="mb-4 text-center text-primary fw-bold text-primary mb-0">Crear cuenta</h2>
 
       <form @submit.prevent="handleRegister">
         <div class="row">
@@ -11,39 +11,17 @@
           </div>
 
           <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Nombre</label>
+            <label class="form-label fw-medium">Nombre Completo</label>
             <input type="text" class="form-control" v-model="nombre" required />
           </div>
 
-          <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Apellidos</label>
-            <input type="text" class="form-control" v-model="apellidos" required />
-          </div>
+
 
           <div class="mb-3 col-md-6">
             <label class="form-label fw-medium">Fecha de nacimiento</label>
             <input type="date" class="form-control" v-model="fecha_nacimiento" required />
           </div>
 
-          <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Dirección</label>
-            <input type="text" class="form-control" v-model="direccion" required />
-          </div>
-
-          <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Ciudad</label>
-            <input type="text" class="form-control" v-model="ciudad" required />
-          </div>
-
-          <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Provincia</label>
-            <input type="text" class="form-control" v-model="provincia" required />
-          </div>
-
-          <div class="mb-3 col-md-6">
-            <label class="form-label fw-medium">Código Postal</label>
-            <input type="text" class="form-control" v-model="zip" required />
-          </div>
 
           <div class="mb-3 col-md-6">
             <label class="form-label fw-medium">Género</label>
@@ -69,10 +47,10 @@
             <input type="password" class="form-control" v-model="password" required />
           </div>
 
-          <!-- <div class="mb-4 col-md-6">
+          <div class="mb-4 col-md-6">
             <label class="form-label fw-medium">Confirmar contraseña</label>
             <input type="password" class="form-control" v-model="confirmar" required />
-          </div> -->
+          </div>
         </div>
 
         <button type="submit" class="btn btn-primary w-100 fw-medium">Registrarse</button>

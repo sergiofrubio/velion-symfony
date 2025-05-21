@@ -2,7 +2,7 @@
     <div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light">
       <div class="card shadow-sm p-4 p-md-5 rounded-4 text-center" style="max-width: 500px; width: 100%;">
         <h1 class="display-1 text-danger fw-bold mb-3">404</h1>
-        <h2 class="mb-4 text-primary fw-semibold">¡Oops! Página no encontrada</h2>
+        <h2 class="mb-4 text-primary fw-bold text-primary mb-0">¡Oops! Página no encontrada</h2>
         <p class="lead mb-4">
           Lo sentimos, la página que estás buscando no existe o ha sido movida.
         </p>
